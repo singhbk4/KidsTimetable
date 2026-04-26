@@ -1,0 +1,1450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kids Task Dashboard - Superhero Challenge</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Comic Sans MS', 'Trebuchet MS', cursive, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        /* Hero Selection Modal */
+        .hero-selection-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .hero-selection-content {
+            background: white;
+            border-radius: 30px;
+            padding: 40px;
+            max-width: 900px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: slideUp 0.4s ease;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .hero-selection-content h1 {
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 15px;
+            background: linear-gradient(90deg, #FF6B6B, #FFD93D);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-selection-content > p {
+            text-align: center;
+            font-size: 1.2em;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .hero-groups {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .hero-groups {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .hero-group h2 {
+            text-align: center;
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .hero-options {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+
+        @media (max-width: 600px) {
+            .hero-options {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .hero-option {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            border: 3px solid #ddd;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .hero-option:hover {
+            border-color: #FFD93D;
+            background: #FFFEF0;
+            transform: scale(1.08);
+            box-shadow: 0 8px 20px rgba(255, 217, 61, 0.3);
+        }
+
+        .hero-option.selected {
+            border-color: #6BCB77;
+            background: linear-gradient(135deg, #E8F8ED 0%, #F0FFF4 100%);
+            box-shadow: 0 8px 20px rgba(107, 203, 119, 0.4);
+        }
+
+        .hero-emoji {
+            font-size: 3.5em;
+            margin-bottom: 10px;
+        }
+
+        .hero-name {
+            font-size: 1em;
+            font-weight: bold;
+            color: #333;
+            text-align: center;
+        }
+
+        .hero-selection-footer {
+            text-align: center;
+            padding: 20px;
+            background: linear-gradient(90deg, #FFE66D15, #FF6B9D15);
+            border-radius: 15px;
+            font-size: 1.1em;
+            color: #666;
+        }
+
+        .submit-hero-btn {
+            margin-top: 20px;
+            padding: 15px 40px;
+            background: linear-gradient(135deg, #6BCB77, #52B788);
+            color: white;
+            border: none;
+            border-radius: 20px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(107, 203, 119, 0.4);
+        }
+
+        .submit-hero-btn:hover {
+            transform: scale(1.08);
+            box-shadow: 0 12px 30px rgba(107, 203, 119, 0.6);
+        }
+
+        .submit-hero-btn:active {
+            transform: scale(0.98);
+        }
+
+        .hero-selection-modal.hidden {
+            display: none !important;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(90deg, #FF6B6B 0%, #FFD93D 50%, #6BCB77 100%);
+            padding: 25px;
+            border-radius: 20px;
+            text-align: center;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .header-info {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 15px;
+        }
+
+        .header-item {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 10px 20px;
+            border-radius: 15px;
+            font-size: 1.1em;
+            backdrop-filter: blur(10px);
+        }
+
+        .hero-badge {
+            display: inline-block;
+            font-size: 2em;
+            margin-right: 10px;
+        }
+
+        /* Main Container */
+        .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 1024px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Kid Card */
+        .kid-card {
+            background: white;
+            border-radius: 25px;
+            padding: 25px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            overflow: hidden;
+            border: 5px solid;
+        }
+
+        .kid-card.advik {
+            border-color: #FF6B9D;
+            background: linear-gradient(to bottom, #FFF5F7 0%, white 100%);
+        }
+
+        .kid-card.viaan {
+            border-color: #4A90E2;
+            background: linear-gradient(to bottom, #F0F8FF 0%, white 100%);
+        }
+
+        .kid-header {
+            text-align: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 3px dashed;
+        }
+
+        .kid-card.advik .kid-header {
+            border-bottom-color: #FF6B9D;
+            color: #FF6B9D;
+        }
+
+        .kid-card.viaan .kid-header {
+            border-bottom-color: #4A90E2;
+            color: #4A90E2;
+        }
+
+        .kid-name {
+            font-size: 2em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .superhero-level {
+            font-size: 1.2em;
+            display: inline-block;
+            padding: 8px 15px;
+            border-radius: 20px;
+            background: linear-gradient(90deg, #FFD700, #FFA500);
+            color: #333;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .change-hero-btn {
+            margin-top: 10px;
+            padding: 8px 15px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 0.85em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .change-hero-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        /* Points Display */
+        .points-display {
+            text-align: center;
+            margin: 20px 0;
+            padding: 15px;
+            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.5);
+            border: 2px solid;
+        }
+
+        .kid-card.advik .points-display {
+            border-color: #FF6B9D;
+        }
+
+        .kid-card.viaan .points-display {
+            border-color: #4A90E2;
+        }
+
+        .points-number {
+            font-size: 2.5em;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        .kid-card.advik .points-number {
+            color: #FF6B9D;
+        }
+
+        .kid-card.viaan .points-number {
+            color: #4A90E2;
+        }
+
+        .points-label {
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        .aud-equivalent {
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-top: 8px;
+        }
+
+        .kid-card.advik .aud-equivalent {
+            color: #FF6B9D;
+        }
+
+        .kid-card.viaan .aud-equivalent {
+            color: #4A90E2;
+        }
+
+        /* Tasks Section */
+        .tasks-section {
+            margin: 25px 0;
+        }
+
+        .section-title {
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .kid-card.advik .section-title {
+            color: #FF6B9D;
+        }
+
+        .kid-card.viaan .section-title {
+            color: #4A90E2;
+        }
+
+        /* Task Item */
+        .task-item {
+            display: flex;
+            align-items: center;
+            padding: 12px;
+            margin-bottom: 10px;
+            background: white;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .task-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .task-item.completed {
+            background: rgba(107, 203, 119, 0.1);
+            border-color: #6BCB77;
+        }
+
+        .task-checkbox {
+            width: 30px;
+            height: 30px;
+            border-radius: 8px;
+            border: 2px solid;
+            margin-right: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3em;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .kid-card.advik .task-checkbox {
+            border-color: #FF6B9D;
+            background: linear-gradient(135deg, #FFB6D9, white);
+        }
+
+        .kid-card.viaan .task-checkbox {
+            border-color: #4A90E2;
+            background: linear-gradient(135deg, #B3D9FF, white);
+        }
+
+        .task-item.completed .task-checkbox {
+            background: linear-gradient(135deg, #6BCB77, #52B788);
+            color: white;
+            border-color: #52B788;
+        }
+
+        .task-label {
+            flex: 1;
+            font-size: 1em;
+            font-weight: 500;
+            color: #333;
+        }
+
+        .task-item.completed .task-label {
+            text-decoration: line-through;
+            color: #888;
+        }
+
+        /* Month Calendar */
+        .calendar-section {
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 2px dashed;
+        }
+
+        .kid-card.advik .calendar-section {
+            border-top-color: #FF6B9D;
+        }
+
+        .kid-card.viaan .calendar-section {
+            border-top-color: #4A90E2;
+        }
+
+        .calendar-title {
+            font-size: 1.1em;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+
+        .kid-card.advik .calendar-title {
+            color: #FF6B9D;
+        }
+
+        .kid-card.viaan .calendar-title {
+            color: #4A90E2;
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 5px;
+            margin-bottom: 10px;
+        }
+
+        .calendar-day {
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            font-size: 0.8em;
+            font-weight: bold;
+            background: #f0f0f0;
+            color: #999;
+            border: 1px solid #ddd;
+        }
+
+        .calendar-day.completed {
+            background: linear-gradient(135deg, #FFD93D, #FFA500);
+            color: white;
+            border-color: #FFA500;
+        }
+
+        .calendar-day.today {
+            border: 2px solid;
+            font-weight: bold;
+        }
+
+        .kid-card.advik .calendar-day.today {
+            border-color: #FF6B9D;
+        }
+
+        .kid-card.viaan .calendar-day.today {
+            border-color: #4A90E2;
+        }
+
+        .monthly-points {
+            background: linear-gradient(90deg, #FFD93D, #FFA500);
+            padding: 12px;
+            border-radius: 12px;
+            text-align: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.1em;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+        }
+
+        /* Extras Section */
+        .extras-section {
+            margin-top: 25px;
+        }
+
+        .extra-perk-item {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            margin-bottom: 8px;
+            background: linear-gradient(90deg, #FFD93D, #FFA50055);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .extra-perk-item:hover {
+            transform: scale(1.02);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .extra-perk-item.completed {
+            background: linear-gradient(90deg, #6BCB77, #52B788);
+            color: white;
+            border-color: #52B788;
+        }
+
+        .extra-icon {
+            font-size: 1.5em;
+            margin-right: 10px;
+        }
+
+        .penalties-section {
+            margin-top: 25px;
+        }
+
+        .penalty-item {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            margin-bottom: 8px;
+            background: linear-gradient(90deg, #FF6B6B, #FF8E8E55);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .penalty-item:hover {
+            transform: scale(1.02);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .penalty-item.applied {
+            background: linear-gradient(90deg, #E74C3C, #C0392B);
+            color: white;
+            border-color: #C0392B;
+        }
+
+        .penalty-icon {
+            font-size: 1.5em;
+            margin-right: 10px;
+        }
+
+        /* Reset Button */
+        .reset-button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 20px;
+            border: none;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #FF6B6B, #FFD93D);
+            color: white;
+            font-size: 1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .reset-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+
+        .reset-button:active {
+            transform: translateY(0);
+        }
+
+        /* Global Reset */
+        .global-reset {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+        }
+
+        .reset-all-button {
+            padding: 15px 40px;
+            background: linear-gradient(135deg, #FF6B6B, #FF4757);
+            color: white;
+            border: none;
+            border-radius: 20px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+
+        .reset-all-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.3);
+        }
+
+        /* Motivational Message */
+        .motivational-message {
+            text-align: center;
+            padding: 15px;
+            margin-top: 20px;
+            background: linear-gradient(90deg, #FFD93D, #FF6B9D);
+            border-radius: 15px;
+            color: white;
+            font-weight: bold;
+            font-size: 1.1em;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+            min-height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Loading and animations */
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .bounce {
+            animation: bounce 0.5s ease;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+
+            .header-info {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .container {
+                gap: 20px;
+            }
+
+            .kid-card {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Superhero Selection Modal -->
+    <div id="heroSelectionModal" class="hero-selection-modal">
+        <div class="hero-selection-content">
+            <h1>🦸 Choose Your Superhero! 🦸</h1>
+            <p>Select which superhero YOU want to be!</p>
+            
+            <div class="hero-groups">
+                <div class="hero-group">
+                    <h2>🔴 AVENGERS 🔴</h2>
+                    <div class="hero-options">
+                        <div class="hero-option" onclick="selectHero('advik', 'iron-man', '🦾')">
+                            <div class="hero-emoji">🦾</div>
+                            <div class="hero-name">Iron Man</div>
+                        </div>
+                        <div class="hero-option" onclick="selectHero('advik', 'captain-america', '🛡️')">
+                            <div class="hero-emoji">🛡️</div>
+                            <div class="hero-name">Captain America</div>
+                        </div>
+                        <div class="hero-option" onclick="selectHero('advik', 'thor', '⚡')">
+                            <div class="hero-emoji">⚡</div>
+                            <div class="hero-name">Thor</div>
+                        </div>
+                        <div class="hero-option" onclick="selectHero('advik', 'hulk', '💚')">
+                            <div class="hero-emoji">💚</div>
+                            <div class="hero-name">Hulk</div>
+                        </div>
+                        <div class="hero-option" onclick="selectHero('advik', 'black-widow', '🏹')">
+                            <div class="hero-emoji">🏹</div>
+                            <div class="hero-name">Black Widow</div>
+                        </div>
+                        <div class="hero-option" onclick="selectHero('advik', 'hawkeye', '🎯')">
+                            <div class="hero-emoji">🎯</div>
+                            <div class="hero-name">Hawkeye</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hero-group">
+                    <h2>🔵 DC UNIVERSE 🔵</h2>
+                    <div class="hero-options">
+                        <div class="hero-option" onclick="selectHero('viaan', 'batman', '🦇')">
+                            <div class="hero-emoji">🦇</div>
+                            <div class="hero-name">Batman</div>
+                        </div>
+                        <div class="hero-option" onclick="selectHero('viaan', 'superman', '🔵')">
+                            <div class="hero-emoji">🔵</div>
+                            <div class="hero-name">Superman</div>
+                        </div>
+                        <div class="hero-option" onclick="selectHero('viaan', 'wonder-woman', '👸')">
+                            <div class="hero-emoji">👸</div>
+                            <div class="hero-name">Wonder Woman</div>
+                        </div>
+                        <div class="hero-option" onclick="selectHero('viaan', 'flash', '🔴')">
+                            <div class="hero-emoji">🔴</div>
+                            <div class="hero-name">The Flash</div>
+                        </div>
+                        <div class="hero-option" onclick="selectHero('viaan', 'aquaman', '🔱')">
+                            <div class="hero-emoji">🔱</div>
+                            <div class="hero-name">Aquaman</div>
+                        </div>
+                        <div class="hero-option" onclick="selectHero('viaan', 'green-lantern', '💚')">
+                            <div class="hero-emoji">💚</div>
+                            <div class="hero-name">Green Lantern</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hero-selection-footer">
+                <p id="selectionState">Please select a superhero for <strong>Advik</strong></p>
+                <button id="submitBtn" class="submit-hero-btn" onclick="submitHeroSelection()" style="display:none;">
+                    ✅ START THE CHALLENGE!
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <div class="header">
+        <div class="hero-badge">🦸</div>
+        <h1>🌟 SUPERHERO CHALLENGE 🌟</h1>
+        <div class="header-info">
+            <div class="header-item">
+                <strong>📅 Date:</strong> <span id="currentDate"></span>
+            </div>
+            <div class="header-item">
+                <strong>⏰ Time:</strong> <span id="currentTime"></span>
+            </div>
+            <div class="header-item">
+                <strong>🏆 Total Points:</strong> <span id="totalPoints">0</span> = <span id="totalAUD">$0</span> AUD
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Advik Card -->
+        <div class="kid-card advik">
+            <div class="kid-header">
+                <div class="hero-badge" id="advik-hero-emoji">🦸‍♂️</div>
+                <div class="kid-name" id="advik-name">Advik</div>
+                <div id="advik-hero-name" style="font-size: 0.9em; color: #999; margin-bottom: 10px;">Choose a superhero</div>
+                <div class="superhero-level" id="advik-level">Level: Hero</div>
+                <button class="change-hero-btn" onclick="changeHero('advik')">Change Superhero</button>
+            </div>
+
+            <!-- Points Display -->
+            <div class="points-display">
+                <div class="points-label">Today's Points</div>
+                <div class="points-number" id="advik-points">0</div>
+                <div class="points-label">/ 10 Points</div>
+                <div class="aud-equivalent" id="advik-aud">$0 AUD</div>
+            </div>
+
+            <!-- Daily Tasks -->
+            <div class="tasks-section">
+                <div class="section-title">📋 Daily Tasks</div>
+                <div id="advik-tasks"></div>
+            </div>
+
+            <!-- Extra Perks -->
+            <div class="extras-section">
+                <div class="section-title">✨ Extra Perks (Bonus $1 AUD)</div>
+                <div id="advik-extras"></div>
+            </div>
+
+            <!-- Penalties -->
+            <div class="penalties-section">
+                <div class="section-title">⚠️ Penalties (-1 Point Each)</div>
+                <div id="advik-penalties"></div>
+            </div>
+
+            <!-- Motivational Message -->
+            <div class="motivational-message" id="advik-motivation">
+                Keep going, you're doing great! 💪
+            </div>
+
+            <!-- Monthly Calendar -->
+            <div class="calendar-section">
+                <div class="calendar-title">📊 April Completion</div>
+                <div class="calendar-grid" id="advik-calendar"></div>
+                <div class="monthly-points" id="advik-monthly">
+                    April Points: 0
+                </div>
+            </div>
+
+            <!-- Reset Button -->
+            <button class="reset-button" onclick="resetDaily('advik')">
+                Reset Today's Tasks
+            </button>
+        </div>
+
+        <!-- Viaan Card -->
+        <div class="kid-card viaan">
+            <div class="kid-header">
+                <div class="hero-badge" id="viaan-hero-emoji">🦸‍♂️</div>
+                <div class="kid-name" id="viaan-name">Viaan</div>
+                <div id="viaan-hero-name" style="font-size: 0.9em; color: #999; margin-bottom: 10px;">Choose a superhero</div>
+                <div class="superhero-level" id="viaan-level">Level: Hero</div>
+                <button class="change-hero-btn" onclick="changeHero('viaan')">Change Superhero</button>
+            </div>
+
+            <!-- Points Display -->
+            <div class="points-display">
+                <div class="points-label">Today's Points</div>
+                <div class="points-number" id="viaan-points">0</div>
+                <div class="points-label">/ 10 Points</div>
+                <div class="aud-equivalent" id="viaan-aud">$0 AUD</div>
+            </div>
+
+            <!-- Daily Tasks -->
+            <div class="tasks-section">
+                <div class="section-title">📋 Daily Tasks</div>
+                <div id="viaan-tasks"></div>
+            </div>
+
+            <!-- Extra Perks -->
+            <div class="extras-section">
+                <div class="section-title">✨ Extra Perks (Bonus $1 AUD)</div>
+                <div id="viaan-extras"></div>
+            </div>
+
+            <!-- Penalties -->
+            <div class="penalties-section">
+                <div class="section-title">⚠️ Penalties (-1 Point Each)</div>
+                <div id="viaan-penalties"></div>
+            </div>
+
+            <!-- Motivational Message -->
+            <div class="motivational-message" id="viaan-motivation">
+                Keep going, you're doing great! 💪
+            </div>
+
+            <!-- Monthly Calendar -->
+            <div class="calendar-section">
+                <div class="calendar-title">📊 April Completion</div>
+                <div class="calendar-grid" id="viaan-calendar"></div>
+                <div class="monthly-points" id="viaan-monthly">
+                    April Points: 0
+                </div>
+            </div>
+
+            <!-- Reset Button -->
+            <button class="reset-button" onclick="resetDaily('viaan')">
+                Reset Today's Tasks
+            </button>
+        </div>
+    </div>
+
+    <!-- Global Reset -->
+    <div class="global-reset">
+        <button class="reset-all-button" onclick="resetAll()">
+            🔄 Reset Everything (New Month)
+        </button>
+    </div>
+
+    <script>
+        // Superhero Data
+        const SUPERHERO_DATA = {
+            'iron-man': { emoji: '🦾', name: 'Iron Man', universe: 'Avengers' },
+            'captain-america': { emoji: '🛡️', name: 'Captain America', universe: 'Avengers' },
+            'thor': { emoji: '⚡', name: 'Thor', universe: 'Avengers' },
+            'hulk': { emoji: '💚', name: 'Hulk', universe: 'Avengers' },
+            'black-widow': { emoji: '🏹', name: 'Black Widow', universe: 'Avengers' },
+            'hawkeye': { emoji: '🎯', name: 'Hawkeye', universe: 'Avengers' },
+            'batman': { emoji: '🦇', name: 'Batman', universe: 'DC' },
+            'superman': { emoji: '🔵', name: 'Superman', universe: 'DC' },
+            'wonder-woman': { emoji: '👸', name: 'Wonder Woman', universe: 'DC' },
+            'flash': { emoji: '🔴', name: 'The Flash', universe: 'DC' },
+            'aquaman': { emoji: '🔱', name: 'Aquaman', universe: 'DC' },
+            'green-lantern': { emoji: '💚', name: 'Green Lantern', universe: 'DC' }
+        };
+
+        // Configuration
+        const KIDS = ['advik', 'viaan'];
+        const CURRENT_MONTH = new Date().getMonth() + 1; // 1-12
+        const CURRENT_YEAR = new Date().getFullYear();
+
+        const DAILY_TASKS = [
+            { icon: '🪥', name: 'Morning Brush' },
+            { icon: '🌅', name: 'Fresh' },
+            { icon: '🥞', name: 'Breakfast on Time' },
+            { icon: '🍱', name: 'Lunch Box to Wash' },
+            { icon: '📚', name: 'Homework' },
+            { icon: '🏃', name: 'Play Outside' },
+            { icon: '🍽️', name: 'Dishwasher Unload' },
+            { icon: '🍴', name: 'Dinner on Time' },
+            { icon: '🦷', name: 'Tooth Brush' },
+            { icon: '📖', name: 'Bed Time - Book/Writing' },
+        ];
+
+        const EXTRA_PERKS = [
+            { icon: '🎨', name: 'Draw New Picture' },
+            { icon: '📖', name: 'Read New Topic' },
+            { icon: '🌱', name: 'Help with Plants' },
+            { icon: '🧠', name: 'Learn New Vocabulary' },
+            { icon: '🎓', name: 'Teach Sibling Something' },
+            { icon: '🛏️', name: 'Make Bed Without Asking' },
+            { icon: '🧩', name: 'Complete a Puzzle' },
+            { icon: '⚽', name: 'Practice New Skill' },
+            { icon: '❤️', name: 'Be Kind to Someone' },
+            { icon: '🥗', name: 'Try New Healthy Food' },
+            { icon: '💰', name: 'Plan Saving Money' },
+            { icon: '✈️', name: 'Plan a Trip' },
+        ];
+
+        const PENALTIES = [
+            { icon: '😤', name: 'Talking Back' },
+            { icon: '😠', name: 'Fighting with Sibling' },
+            { icon: '🙉', name: 'Not Listening' },
+            { icon: '📱', name: 'Screen Time Violation' },
+            { icon: '😡', name: 'Throwing Tantrum' },
+            { icon: '🍽️', name: 'Skipping Meal' },
+            { icon: '🤐', name: 'Interrupting' },
+            { icon: '🤥', name: 'Lying' },
+        ];
+
+        const MOTIVATIONAL_MESSAGES = [
+            '🌟 Keep going, you\'re doing great! 💪',
+            '🚀 You\'re a SUPERPOWERS! 🦸',
+            '💯 Amazing work today! 🌈',
+            '👑 You\'re a CHAMPION! 🏆',
+            '🎯 Keep crushing those goals! 💥',
+            '✨ You\'re shining bright! ⭐',
+            '🔥 On fire today! 🌟',
+            '🎉 Fantastic effort! 🎊',
+            '💎 You\'re precious! 👑',
+            '🌺 Beautiful progress! 🦋',
+        ];
+
+        let currentKidSelecting = 'advik';
+
+        // Initialize
+        function init() {
+            updateDateTime();
+            setInterval(updateDateTime, 1000);
+
+            // Check if heroes are selected
+            const advikHero = localStorage.getItem('advik_hero');
+            const viaanHero = localStorage.getItem('viaan_hero');
+
+            if (advikHero && viaanHero) {
+                hideHeroSelection();
+                loadDashboard();
+            } else {
+                showHeroSelection();
+            }
+        }
+
+        // Show Hero Selection Modal
+        function showHeroSelection() {
+            document.getElementById('heroSelectionModal').classList.remove('hidden');
+            document.querySelector('.header').style.display = 'none';
+            document.querySelector('.container').style.display = 'none';
+            document.querySelector('.global-reset').style.display = 'none';
+            updateSelectionState();
+        }
+
+        // Hide Hero Selection Modal
+        function hideHeroSelection() {
+            document.getElementById('heroSelectionModal').classList.add('hidden');
+            document.querySelector('.header').style.display = 'block';
+            document.querySelector('.container').style.display = 'grid';
+            document.querySelector('.global-reset').style.display = 'block';
+        }
+
+        // Select Hero
+        function selectHero(kid, heroId, emoji) {
+            // Remove previous selection
+            document.querySelectorAll(`#heroSelectionModal .hero-option.selected`).forEach(el => {
+                el.classList.remove('selected');
+            });
+
+            // Add selection to clicked option
+            event.currentTarget.classList.add('selected');
+
+            // Store selection
+            localStorage.setItem(`${kid}_hero`, heroId);
+
+            // Check if both kids have selected
+            const advikHero = localStorage.getItem('advik_hero');
+            const viaanHero = localStorage.getItem('viaan_hero');
+
+            if (advikHero && viaanHero) {
+                // Both selected - show submit button and update message
+                document.getElementById('submitBtn').style.display = 'inline-block';
+                document.getElementById('selectionState').innerHTML = '🎉 <strong>Both heroes selected!</strong> Click the button below to START!';
+            } else {
+                // Not both selected - show which kid to select next
+                currentKidSelecting = kid === 'advik' ? 'viaan' : 'advik';
+                updateSelectionState();
+            }
+        }
+
+        // Submit Hero Selection
+        function submitHeroSelection() {
+            const advikHero = localStorage.getItem('advik_hero');
+            const viaanHero = localStorage.getItem('viaan_hero');
+
+            if (advikHero && viaanHero) {
+                hideHeroSelection();
+                loadDashboard();
+            } else {
+                alert('Please select a superhero for both kids first! 🦸');
+            }
+        }
+
+        // Update Selection State
+        function updateSelectionState() {
+            const kidName = currentKidSelecting === 'advik' ? 'Advik' : 'Viaan';
+            document.getElementById('selectionState').innerHTML = `Please select a superhero for <strong>${kidName}</strong>`;
+        }
+
+        // Change Hero
+        function changeHero(kid) {
+            currentKidSelecting = kid;
+            showHeroSelection();
+            document.getElementById('selectionState').innerHTML = `Change superhero for <strong>${kid === 'advik' ? 'Advik' : 'Viaan'}</strong>`;
+        }
+
+        // Load Dashboard
+        function loadDashboard() {
+            KIDS.forEach(kid => {
+                displayHeroInfo(kid);
+                renderTasks(kid);
+                renderExtras(kid);
+                renderPenalties(kid);
+                renderCalendar(kid);
+                updatePoints(kid);
+                updateMotivation(kid);
+            });
+
+            loadData();
+        }
+
+        // Display Hero Info
+        function displayHeroInfo(kid) {
+            const heroId = localStorage.getItem(`${kid}_hero`);
+            if (heroId && SUPERHERO_DATA[heroId]) {
+                const hero = SUPERHERO_DATA[heroId];
+                document.getElementById(`${kid}-hero-emoji`).textContent = hero.emoji;
+                document.getElementById(`${kid}-hero-name`).textContent = `${hero.universe} - ${hero.name}`;
+            }
+        }
+
+        // DateTime
+        function updateDateTime() {
+            const now = new Date();
+            const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            const timeOptions = { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true };
+            
+            document.getElementById('currentDate').textContent = now.toLocaleDateString('en-US', dateOptions);
+            document.getElementById('currentTime').textContent = now.toLocaleTimeString('en-US', timeOptions);
+        }
+
+        // Render Tasks
+        function renderTasks(kid) {
+            const container = document.getElementById(`${kid}-tasks`);
+            container.innerHTML = '';
+
+            DAILY_TASKS.forEach((task, index) => {
+                const taskEl = document.createElement('div');
+                taskEl.className = 'task-item';
+                taskEl.id = `${kid}-task-${index}`;
+                taskEl.onclick = () => toggleTask(kid, index);
+
+                const isCompleted = isTaskCompleted(kid, index);
+                if (isCompleted) {
+                    taskEl.classList.add('completed');
+                }
+
+                taskEl.innerHTML = `
+                    <div class="task-checkbox">${isCompleted ? '✓' : ''}</div>
+                    <div class="task-label">${task.icon} ${task.name}</div>
+                `;
+
+                container.appendChild(taskEl);
+            });
+        }
+
+        // Render Extra Perks
+        function renderExtras(kid) {
+            const container = document.getElementById(`${kid}-extras`);
+            container.innerHTML = '';
+
+            EXTRA_PERKS.forEach((perk, index) => {
+                const perkEl = document.createElement('div');
+                perkEl.className = 'extra-perk-item';
+                perkEl.id = `${kid}-extra-${index}`;
+                perkEl.onclick = () => toggleExtra(kid, index);
+
+                const isCompleted = isExtraCompleted(kid, index);
+                if (isCompleted) {
+                    perkEl.classList.add('completed');
+                }
+
+                perkEl.innerHTML = `
+                    <div class="extra-icon">${perk.icon}</div>
+                    <div>${isCompleted ? '✓ ' : ''}${perk.name}</div>
+                `;
+
+                container.appendChild(perkEl);
+            });
+        }
+
+        // Render Penalties
+        function renderPenalties(kid) {
+            const container = document.getElementById(`${kid}-penalties`);
+            container.innerHTML = '';
+
+            PENALTIES.forEach((penalty, index) => {
+                const penaltyEl = document.createElement('div');
+                penaltyEl.className = 'penalty-item';
+                penaltyEl.id = `${kid}-penalty-${index}`;
+                penaltyEl.onclick = () => togglePenalty(kid, index);
+
+                const isApplied = isPenaltyApplied(kid, index);
+                if (isApplied) {
+                    penaltyEl.classList.add('applied');
+                }
+
+                penaltyEl.innerHTML = `
+                    <div class="penalty-icon">${penalty.icon}</div>
+                    <div>${isApplied ? '✓ Applied' : penalty.name}</div>
+                `;
+
+                container.appendChild(penaltyEl);
+            });
+        }
+
+        // Render Calendar
+        function renderCalendar(kid) {
+            const container = document.getElementById(`${kid}-calendar`);
+            container.innerHTML = '';
+
+            const daysInMonth = new Date(CURRENT_YEAR, CURRENT_MONTH, 0).getDate();
+            const today = new Date().getDate();
+
+            for (let day = 1; day <= daysInMonth; day++) {
+                const dayEl = document.createElement('div');
+                dayEl.className = 'calendar-day';
+                dayEl.textContent = day;
+
+                if (day === today) {
+                    dayEl.classList.add('today');
+                }
+
+                if (isDayCompleted(kid, day)) {
+                    dayEl.classList.add('completed');
+                }
+
+                container.appendChild(dayEl);
+            }
+        }
+
+        // Check if task is completed
+        function isTaskCompleted(kid, index) {
+            const key = `${kid}_tasks_${getCurrentDate()}`;
+            const data = JSON.parse(localStorage.getItem(key) || '[]');
+            return data.includes(index);
+        }
+
+        // Check if extra is completed
+        function isExtraCompleted(kid, index) {
+            const key = `${kid}_extras_${getCurrentDate()}`;
+            const data = JSON.parse(localStorage.getItem(key) || '[]');
+            return data.includes(index);
+        }
+
+        // Check if penalty is applied
+        function isPenaltyApplied(kid, index) {
+            const key = `${kid}_penalties_${getCurrentDate()}`;
+            const data = JSON.parse(localStorage.getItem(key) || '[]');
+            return data.includes(index);
+        }
+
+        // Check if day is completed
+        function isDayCompleted(kid, day) {
+            const key = `${kid}_tasks_${day}`;
+            const data = JSON.parse(localStorage.getItem(key) || '[]');
+            return data.length === DAILY_TASKS.length;
+        }
+
+        // Toggle Task
+        function toggleTask(kid, index) {
+            const key = `${kid}_tasks_${getCurrentDate()}`;
+            let data = JSON.parse(localStorage.getItem(key) || '[]');
+
+            if (data.includes(index)) {
+                data = data.filter(i => i !== index);
+            } else {
+                data.push(index);
+            }
+
+            localStorage.setItem(key, JSON.stringify(data));
+
+            renderTasks(kid);
+            updatePoints(kid);
+            updateMotivation(kid);
+            renderCalendar(kid);
+
+            // Visual feedback
+            const taskEl = document.getElementById(`${kid}-task-${index}`);
+            taskEl.classList.add('bounce');
+            setTimeout(() => taskEl.classList.remove('bounce'), 500);
+        }
+
+        // Toggle Extra Perk
+        function toggleExtra(kid, index) {
+            const key = `${kid}_extras_${getCurrentDate()}`;
+            let data = JSON.parse(localStorage.getItem(key) || '[]');
+
+            if (data.includes(index)) {
+                data = data.filter(i => i !== index);
+            } else {
+                data.push(index);
+            }
+
+            localStorage.setItem(key, JSON.stringify(data));
+
+            renderExtras(kid);
+            updatePoints(kid);
+            updateMotivation(kid);
+
+            // Visual feedback
+            const extraEl = document.getElementById(`${kid}-extra-${index}`);
+            extraEl.classList.add('bounce');
+            setTimeout(() => extraEl.classList.remove('bounce'), 500);
+
+            // Celebration message
+            if (data.includes(index)) {
+                showCelebration(kid);
+            }
+        }
+
+        // Toggle Penalty
+        function togglePenalty(kid, index) {
+            const key = `${kid}_penalties_${getCurrentDate()}`;
+            let data = JSON.parse(localStorage.getItem(key) || '[]');
+
+            if (data.includes(index)) {
+                data = data.filter(i => i !== index);
+            } else {
+                data.push(index);
+            }
+
+            localStorage.setItem(key, JSON.stringify(data));
+
+            renderPenalties(kid);
+            updatePoints(kid);
+
+            // Visual feedback
+            const penaltyEl = document.getElementById(`${kid}-penalty-${index}`);
+            penaltyEl.classList.add('bounce');
+            setTimeout(() => penaltyEl.classList.remove('bounce'), 500);
+
+            // Warning message
+            if (data.includes(index)) {
+                const penaltyName = PENALTIES[index].name;
+                alert(`⚠️ ${penaltyName} deducted 1 point from ${kid === 'advik' ? 'Advik' : 'Viaan'}!`);
+            }
+        }
+
+        // Update Points
+        function updatePoints(kid) {
+            const tasksKey = `${kid}_tasks_${getCurrentDate()}`;
+            const extrasKey = `${kid}_extras_${getCurrentDate()}`;
+            const penaltiesKey = `${kid}_penalties_${getCurrentDate()}`;
+
+            const taskCount = JSON.parse(localStorage.getItem(tasksKey) || '[]').length;
+            const extraCount = JSON.parse(localStorage.getItem(extrasKey) || '[]').length;
+            const penaltyCount = JSON.parse(localStorage.getItem(penaltiesKey) || '[]').length;
+
+            const taskPoints = taskCount === DAILY_TASKS.length ? 10 : taskCount;
+            const extraPoints = extraCount;
+            const penaltyPoints = penaltyCount; // Each penalty = -1 point
+            const totalPoints = Math.max(0, taskPoints + extraPoints - penaltyPoints); // Ensure never goes below 0
+
+            document.getElementById(`${kid}-points`).textContent = totalPoints;
+            document.getElementById(`${kid}-aud`).textContent = `$${totalPoints} AUD`;
+
+            // Update Level
+            let level = 'Hero';
+            if (totalPoints >= 20) level = 'Super Hero 🦸';
+            if (totalPoints >= 30) level = 'Mega Hero 🚀';
+            if (totalPoints >= 50) level = 'Legend 👑';
+            document.getElementById(`${kid}-level`).textContent = `Level: ${level}`;
+
+            // Update Monthly Points
+            const monthlyPoints = calculateMonthlyPoints(kid);
+            document.getElementById(`${kid}-monthly`).textContent = `April Points: ${monthlyPoints}`;
+
+            updateTotalPoints();
+        }
+
+        // Calculate Monthly Points
+        function calculateMonthlyPoints(kid) {
+            let total = 0;
+            const daysInMonth = new Date(CURRENT_YEAR, CURRENT_MONTH, 0).getDate();
+
+            for (let day = 1; day <= daysInMonth; day++) {
+                const tasksKey = `${kid}_tasks_${day}-${CURRENT_MONTH}-${CURRENT_YEAR}`;
+                const extrasKey = `${kid}_extras_${day}-${CURRENT_MONTH}-${CURRENT_YEAR}`;
+                const penaltiesKey = `${kid}_penalties_${day}-${CURRENT_MONTH}-${CURRENT_YEAR}`;
+
+                const taskCount = JSON.parse(localStorage.getItem(tasksKey) || '[]').length;
+                const extraCount = JSON.parse(localStorage.getItem(extrasKey) || '[]').length;
+                const penaltyCount = JSON.parse(localStorage.getItem(penaltiesKey) || '[]').length;
+
+                const taskPoints = taskCount === DAILY_TASKS.length ? 10 : taskCount;
+                const dayPoints = Math.max(0, taskPoints + extraCount - penaltyCount); // Ensure never goes below 0
+                total += dayPoints;
+            }
+
+            return total;
+        }
+
+        // Update Total Points
+        function updateTotalPoints() {
+            let total = 0;
+            KIDS.forEach(kid => {
+                const points = parseInt(document.getElementById(`${kid}-points`).textContent);
+                total += points;
+            });
+
+            document.getElementById('totalPoints').textContent = total;
+            document.getElementById('totalAUD').textContent = `$${total}`;
+        }
+
+        // Update Motivation
+        function updateMotivation(kid) {
+            const points = parseInt(document.getElementById(`${kid}-points`).textContent);
+            const message = MOTIVATIONAL_MESSAGES[Math.floor(Math.random() * MOTIVATIONAL_MESSAGES.length)];
+            
+            let customMessage = message;
+            if (points === 0) {
+                customMessage = '🌟 Start your day strong! 💪';
+            } else if (points === 10) {
+                customMessage = '🎉 All tasks done! Great job! 🏆';
+            } else if (points > 10) {
+                customMessage = `⭐⭐⭐ ${points} Points! You're unstoppable! 🚀`;
+            }
+
+            document.getElementById(`${kid}-motivation`).textContent = customMessage;
+        }
+
+        // Current Date String
+        function getCurrentDate() {
+            const now = new Date();
+            return `${now.getDate()}-${now.getMonth() + 1}-${now.getFullYear()}`;
+        }
+
+        // Reset Daily
+        function resetDaily(kid) {
+            if (confirm(`Reset ${kid === 'advik' ? 'Advik' : 'Viaan'}'s tasks for today?`)) {
+                localStorage.removeItem(`${kid}_tasks_${getCurrentDate()}`);
+                localStorage.removeItem(`${kid}_extras_${getCurrentDate()}`);
+                renderTasks(kid);
+                renderExtras(kid);
+                updatePoints(kid);
+                updateMotivation(kid);
+                alert('Daily tasks reset! Time for a fresh start! 🌟');
+            }
+        }
+
+        // Reset All
+        function resetAll() {
+            if (confirm('Are you sure you want to reset EVERYTHING for a new month? This cannot be undone!')) {
+                // Keep hero selections, clear only task data
+                const advikHero = localStorage.getItem('advik_hero');
+                const viaanHero = localStorage.getItem('viaan_hero');
+                
+                localStorage.clear();
+                
+                // Restore hero selections
+                if (advikHero) localStorage.setItem('advik_hero', advikHero);
+                if (viaanHero) localStorage.setItem('viaan_hero', viaanHero);
+                
+                location.reload();
+            }
+        }
+
+        // Show Celebration
+        function showCelebration(kid) {
+            alert(`🎉 Amazing! You completed a bonus perk! 🌟 +1 AUD`);
+        }
+
+        // Load Data
+        function loadData() {
+            // Data loads automatically from localStorage
+        }
+
+        // Start
+        init();
+    </script>
+</body>
+</html>
