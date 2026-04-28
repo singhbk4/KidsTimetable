@@ -387,53 +387,78 @@
         .task-item {
             display: flex;
             align-items: center;
+            justify-content: space-between;
+            gap: 10px;
             padding: 12px;
             margin-bottom: 10px;
             background: white;
             border-radius: 12px;
-            cursor: pointer;
             transition: all 0.3s ease;
             border: 2px solid transparent;
         }
 
         .task-item:hover {
-            transform: translateX(5px);
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
 
-        .task-item.completed {
+        .task-item.yes {
             background: rgba(107, 203, 119, 0.1);
             border-color: #6BCB77;
         }
 
-        .task-checkbox {
-            width: 30px;
-            height: 30px;
-            border-radius: 8px;
-            border: 2px solid;
-            margin-right: 12px;
+        .task-item.no {
+            background: rgba(255, 107, 107, 0.12);
+            border-color: #FF6B6B;
+        }
+
+        .task-main {
             display: flex;
             align-items: center;
-            justify-content: center;
-            font-size: 1.3em;
-            cursor: pointer;
+            min-width: 0;
+            flex: 1;
+        }
+
+        .task-status {
+            width: 32px;
+            text-align: center;
+            font-size: 1.1em;
+            margin-right: 10px;
             flex-shrink: 0;
         }
 
-        .kid-card.advik .task-checkbox {
-            border-color: #FF6B9D;
-            background: linear-gradient(135deg, #FFB6D9, white);
+        .task-controls {
+            display: flex;
+            gap: 8px;
+            flex-shrink: 0;
         }
 
-        .kid-card.viaan .task-checkbox {
-            border-color: #4A90E2;
-            background: linear-gradient(135deg, #B3D9FF, white);
-        }
-
-        .task-item.completed .task-checkbox {
-            background: linear-gradient(135deg, #6BCB77, #52B788);
+        .task-btn {
+            border: none;
+            border-radius: 10px;
+            padding: 6px 10px;
+            font-size: 0.85em;
+            font-weight: bold;
+            cursor: pointer;
             color: white;
-            border-color: #52B788;
+            opacity: 0.55;
+            transition: transform 0.2s ease, opacity 0.2s ease;
+        }
+
+        .task-btn:hover {
+            transform: translateY(-1px);
+            opacity: 0.85;
+        }
+
+        .task-btn.selected {
+            opacity: 1;
+        }
+
+        .task-btn.yes {
+            background: #2EAD66;
+        }
+
+        .task-btn.no {
+            background: #E55353;
         }
 
         .task-label {
@@ -441,11 +466,31 @@
             font-size: 1em;
             font-weight: 500;
             color: #333;
+            word-break: break-word;
         }
 
-        .task-item.completed .task-label {
-            text-decoration: line-through;
-            color: #888;
+        .task-item.yes .task-label {
+            color: #2A6A3F;
+        }
+
+        .task-item.no .task-label {
+            color: #9C2F2F;
+        }
+
+        .task-net-summary {
+            margin-top: 10px;
+            font-size: 0.9em;
+            font-weight: bold;
+            text-align: right;
+            color: #555;
+        }
+
+        .kid-card.advik .task-net-summary {
+            color: #C4457A;
+        }
+
+        .kid-card.viaan .task-net-summary {
+            color: #2D6FB8;
         }
 
         /* Month Calendar */
@@ -659,6 +704,93 @@
             justify-content: center;
         }
 
+        /* History and Monthly Summary */
+        .history-section {
+            max-width: 1400px;
+            margin: 20px auto 0;
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        .history-title {
+            font-size: 1.4em;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #333;
+            text-align: center;
+        }
+
+        .history-controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 16px;
+        }
+
+        .history-controls label {
+            font-weight: bold;
+            color: #555;
+        }
+
+        .history-controls input {
+            padding: 8px 10px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-family: inherit;
+            font-size: 0.95em;
+        }
+
+        .history-day-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+
+        .history-day-card {
+            border-radius: 12px;
+            padding: 12px;
+            border: 2px solid #eee;
+            background: #fafafa;
+            font-size: 0.95em;
+            line-height: 1.5;
+        }
+
+        .history-day-card strong {
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .history-table {
+            width: 100%;
+            border-collapse: collapse;
+            overflow: hidden;
+            border-radius: 12px;
+        }
+
+        .history-table th,
+        .history-table td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        .history-table th {
+            background: #f7f7f7;
+            color: #333;
+        }
+
+        .history-total {
+            margin-top: 10px;
+            text-align: right;
+            font-weight: bold;
+            color: #333;
+        }
+
         /* Loading and animations */
         @keyframes bounce {
             0%, 100% { transform: translateY(0); }
@@ -687,6 +819,10 @@
             .kid-card {
                 padding: 15px;
             }
+
+            .history-day-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -701,27 +837,27 @@
                 <div class="hero-group">
                     <h2>🔴 AVENGERS 🔴</h2>
                     <div class="hero-options">
-                        <div class="hero-option" onclick="selectHero('advik', 'iron-man', '🦾')">
+                        <div class="hero-option" onclick="selectHero('advik', 'iron-man', this)">
                             <div class="hero-emoji">🦾</div>
                             <div class="hero-name">Iron Man</div>
                         </div>
-                        <div class="hero-option" onclick="selectHero('advik', 'captain-america', '🛡️')">
+                        <div class="hero-option" onclick="selectHero('advik', 'captain-america', this)">
                             <div class="hero-emoji">🛡️</div>
                             <div class="hero-name">Captain America</div>
                         </div>
-                        <div class="hero-option" onclick="selectHero('advik', 'thor', '⚡')">
+                        <div class="hero-option" onclick="selectHero('advik', 'thor', this)">
                             <div class="hero-emoji">⚡</div>
                             <div class="hero-name">Thor</div>
                         </div>
-                        <div class="hero-option" onclick="selectHero('advik', 'hulk', '💚')">
+                        <div class="hero-option" onclick="selectHero('advik', 'hulk', this)">
                             <div class="hero-emoji">💚</div>
                             <div class="hero-name">Hulk</div>
                         </div>
-                        <div class="hero-option" onclick="selectHero('advik', 'black-widow', '🏹')">
+                        <div class="hero-option" onclick="selectHero('advik', 'black-widow', this)">
                             <div class="hero-emoji">🏹</div>
                             <div class="hero-name">Black Widow</div>
                         </div>
-                        <div class="hero-option" onclick="selectHero('advik', 'hawkeye', '🎯')">
+                        <div class="hero-option" onclick="selectHero('advik', 'hawkeye', this)">
                             <div class="hero-emoji">🎯</div>
                             <div class="hero-name">Hawkeye</div>
                         </div>
@@ -731,27 +867,27 @@
                 <div class="hero-group">
                     <h2>🔵 DC UNIVERSE 🔵</h2>
                     <div class="hero-options">
-                        <div class="hero-option" onclick="selectHero('viaan', 'batman', '🦇')">
+                        <div class="hero-option" onclick="selectHero('viaan', 'batman', this)">
                             <div class="hero-emoji">🦇</div>
                             <div class="hero-name">Batman</div>
                         </div>
-                        <div class="hero-option" onclick="selectHero('viaan', 'superman', '🔵')">
+                        <div class="hero-option" onclick="selectHero('viaan', 'superman', this)">
                             <div class="hero-emoji">🔵</div>
                             <div class="hero-name">Superman</div>
                         </div>
-                        <div class="hero-option" onclick="selectHero('viaan', 'wonder-woman', '👸')">
+                        <div class="hero-option" onclick="selectHero('viaan', 'wonder-woman', this)">
                             <div class="hero-emoji">👸</div>
                             <div class="hero-name">Wonder Woman</div>
                         </div>
-                        <div class="hero-option" onclick="selectHero('viaan', 'flash', '🔴')">
+                        <div class="hero-option" onclick="selectHero('viaan', 'flash', this)">
                             <div class="hero-emoji">🔴</div>
                             <div class="hero-name">The Flash</div>
                         </div>
-                        <div class="hero-option" onclick="selectHero('viaan', 'aquaman', '🔱')">
+                        <div class="hero-option" onclick="selectHero('viaan', 'aquaman', this)">
                             <div class="hero-emoji">🔱</div>
                             <div class="hero-name">Aquaman</div>
                         </div>
-                        <div class="hero-option" onclick="selectHero('viaan', 'green-lantern', '💚')">
+                        <div class="hero-option" onclick="selectHero('viaan', 'green-lantern', this)">
                             <div class="hero-emoji">💚</div>
                             <div class="hero-name">Green Lantern</div>
                         </div>
@@ -801,19 +937,20 @@
             <div class="points-display">
                 <div class="points-label">Today's Points</div>
                 <div class="points-number" id="advik-points">0</div>
-                <div class="points-label">/ 10 Points</div>
-                <div class="aud-equivalent" id="advik-aud">$0 AUD</div>
+                <div class="points-label">Yes = +1 | No = -1 per task</div>
+                <div class="aud-equivalent" id="advik-aud">$0.00 AUD</div>
             </div>
 
             <!-- Daily Tasks -->
             <div class="tasks-section">
                 <div class="section-title">📋 Daily Tasks</div>
                 <div id="advik-tasks"></div>
+                <div class="task-net-summary" id="advik-task-net">Net task points for today: 0</div>
             </div>
 
             <!-- Extra Perks -->
             <div class="extras-section">
-                <div class="section-title">✨ Extra Perks (Bonus $1 AUD)</div>
+                <div class="section-title">✨ Extra Perks (Bonus +1 Point)</div>
                 <div id="advik-extras"></div>
             </div>
 
@@ -830,10 +967,10 @@
 
             <!-- Monthly Calendar -->
             <div class="calendar-section">
-                <div class="calendar-title">📊 April Completion</div>
+                <div class="calendar-title" id="advik-calendar-title">📊 Monthly Completion</div>
                 <div class="calendar-grid" id="advik-calendar"></div>
                 <div class="monthly-points" id="advik-monthly">
-                    April Points: 0
+                    Monthly Points: 0
                 </div>
             </div>
 
@@ -857,19 +994,20 @@
             <div class="points-display">
                 <div class="points-label">Today's Points</div>
                 <div class="points-number" id="viaan-points">0</div>
-                <div class="points-label">/ 10 Points</div>
-                <div class="aud-equivalent" id="viaan-aud">$0 AUD</div>
+                <div class="points-label">Yes = +1 | No = -1 per task</div>
+                <div class="aud-equivalent" id="viaan-aud">$0.00 AUD</div>
             </div>
 
             <!-- Daily Tasks -->
             <div class="tasks-section">
                 <div class="section-title">📋 Daily Tasks</div>
                 <div id="viaan-tasks"></div>
+                <div class="task-net-summary" id="viaan-task-net">Net task points for today: 0</div>
             </div>
 
             <!-- Extra Perks -->
             <div class="extras-section">
-                <div class="section-title">✨ Extra Perks (Bonus $1 AUD)</div>
+                <div class="section-title">✨ Extra Perks (Bonus +1 Point)</div>
                 <div id="viaan-extras"></div>
             </div>
 
@@ -886,10 +1024,10 @@
 
             <!-- Monthly Calendar -->
             <div class="calendar-section">
-                <div class="calendar-title">📊 April Completion</div>
+                <div class="calendar-title" id="viaan-calendar-title">📊 Monthly Completion</div>
                 <div class="calendar-grid" id="viaan-calendar"></div>
                 <div class="monthly-points" id="viaan-monthly">
-                    April Points: 0
+                    Monthly Points: 0
                 </div>
             </div>
 
@@ -903,8 +1041,35 @@
     <!-- Global Reset -->
     <div class="global-reset">
         <button class="reset-all-button" onclick="resetAll()">
-            🔄 Reset Everything (New Month)
+            🔄 Reset Current Month (Keep History)
         </button>
+    </div>
+
+    <div class="history-section">
+        <div class="history-title">📚 History & Monthly Earnings Summary</div>
+        <div class="history-controls">
+            <label for="historyDate">View Day</label>
+            <input type="date" id="historyDate">
+            <label for="historyMonth">View Month</label>
+            <input type="month" id="historyMonth">
+        </div>
+
+        <div class="history-day-grid">
+            <div class="history-day-card" id="advik-day-summary"></div>
+            <div class="history-day-card" id="viaan-day-summary"></div>
+        </div>
+
+        <table class="history-table">
+            <thead>
+                <tr>
+                    <th>Kid</th>
+                    <th>Monthly Points</th>
+                    <th>Monthly Earnings (AUD)</th>
+                </tr>
+            </thead>
+            <tbody id="historyMonthBody"></tbody>
+        </table>
+        <div class="history-total" id="historyMonthTotal"></div>
     </div>
 
     <script>
@@ -928,28 +1093,29 @@
         const KIDS = ['advik', 'viaan'];
         const CURRENT_MONTH = new Date().getMonth() + 1; // 1-12
         const CURRENT_YEAR = new Date().getFullYear();
+        const POINTS_PER_AUD = 10;
 
         const DAILY_TASKS = [
-            { icon: '🪥', name: 'Morning Brush' },
-            { icon: '🌅', name: 'Fresh' },
-            { icon: '🥞', name: 'Breakfast on Time' },
+            { icon: '🪥', name: 'Morning Brush and after Dinner' },
+            { icon: '🌅', name: 'Shower/Face wash/Hair comb' },
+            { icon: '🥞', name: 'Dinning Table clean after meal' },
             { icon: '🍱', name: 'Lunch Box to Wash' },
             { icon: '📚', name: 'Homework' },
             { icon: '🏃', name: 'Play Outside' },
             { icon: '🍽️', name: 'Dishwasher Unload' },
-            { icon: '🍴', name: 'Dinner on Time' },
-            { icon: '🦷', name: 'Tooth Brush' },
-            { icon: '📖', name: 'Bed Time - Book/Writing' },
+            { icon: '🍴', name: 'Keep Study and Bedroom tidy' },
+            { icon: '🦷', name: 'Reduced screen time' },
+            { icon: '📖', name: 'Bed Time - Book reading or Writing' },
         ];
 
         const EXTRA_PERKS = [
-            { icon: '🎨', name: 'Draw New Picture' },
-            { icon: '📖', name: 'Read New Topic' },
+            { icon: '🎨', name: 'Garage Cleanup' },
+            { icon: '📖', name: 'Read New Topic and Summary' },
             { icon: '🌱', name: 'Help with Plants' },
             { icon: '🧠', name: 'Learn New Vocabulary' },
             { icon: '🎓', name: 'Teach Sibling Something' },
             { icon: '🛏️', name: 'Make Bed Without Asking' },
-            { icon: '🧩', name: 'Complete a Puzzle' },
+            { icon: '🧩', name: 'Toilets Clean' },
             { icon: '⚽', name: 'Practice New Skill' },
             { icon: '❤️', name: 'Be Kind to Someone' },
             { icon: '🥗', name: 'Try New Healthy Food' },
@@ -1018,14 +1184,14 @@
         }
 
         // Select Hero
-        function selectHero(kid, heroId, emoji) {
+        function selectHero(kid, heroId, selectedElement) {
             // Remove previous selection
             document.querySelectorAll(`#heroSelectionModal .hero-option.selected`).forEach(el => {
                 el.classList.remove('selected');
             });
 
             // Add selection to clicked option
-            event.currentTarget.classList.add('selected');
+            selectedElement.classList.add('selected');
 
             // Store selection
             localStorage.setItem(`${kid}_hero`, heroId);
@@ -1074,6 +1240,7 @@
         // Load Dashboard
         function loadDashboard() {
             KIDS.forEach(kid => {
+                document.getElementById(`${kid}-calendar-title`).textContent = `📊 ${getCurrentMonthName()} Completion`;
                 displayHeroInfo(kid);
                 renderTasks(kid);
                 renderExtras(kid);
@@ -1082,6 +1249,8 @@
                 updatePoints(kid);
                 updateMotivation(kid);
             });
+
+            initHistoryView();
 
             loadData();
         }
@@ -1112,19 +1281,27 @@
             container.innerHTML = '';
 
             DAILY_TASKS.forEach((task, index) => {
+                const taskStatus = getTaskStatus(kid, index);
                 const taskEl = document.createElement('div');
                 taskEl.className = 'task-item';
                 taskEl.id = `${kid}-task-${index}`;
-                taskEl.onclick = () => toggleTask(kid, index);
-
-                const isCompleted = isTaskCompleted(kid, index);
-                if (isCompleted) {
-                    taskEl.classList.add('completed');
+                if (taskStatus !== 'none') {
+                    taskEl.classList.add(taskStatus);
                 }
 
+                const yesSelected = taskStatus === 'yes' ? 'selected' : '';
+                const noSelected = taskStatus === 'no' ? 'selected' : '';
+                const statusIcon = taskStatus === 'yes' ? '✅' : taskStatus === 'no' ? '❌' : '➖';
+
                 taskEl.innerHTML = `
-                    <div class="task-checkbox">${isCompleted ? '✓' : ''}</div>
-                    <div class="task-label">${task.icon} ${task.name}</div>
+                    <div class="task-main">
+                        <div class="task-status">${statusIcon}</div>
+                        <div class="task-label">${task.icon} ${task.name}</div>
+                    </div>
+                    <div class="task-controls">
+                        <button class="task-btn yes ${yesSelected}" type="button" onclick="setTaskChoice('${kid}', ${index}, 'yes')">Yes</button>
+                        <button class="task-btn no ${noSelected}" type="button" onclick="setTaskChoice('${kid}', ${index}, 'no')">No</button>
+                    </div>
                 `;
 
                 container.appendChild(taskEl);
@@ -1206,11 +1383,72 @@
             }
         }
 
-        // Check if task is completed
-        function isTaskCompleted(kid, index) {
+        // Normalize task data to support legacy array format and new yes/no format
+        function parseTaskData(rawValue) {
+            if (!rawValue) {
+                return { yes: [], no: [] };
+            }
+
+            const parsed = JSON.parse(rawValue);
+
+            if (Array.isArray(parsed)) {
+                return { yes: [...new Set(parsed)], no: [] };
+            }
+
+            const yes = Array.isArray(parsed.yes) ? [...new Set(parsed.yes)] : [];
+            const no = Array.isArray(parsed.no) ? [...new Set(parsed.no)] : [];
+
+            return { yes, no };
+        }
+
+        function getTaskDataForDate(kid, dateStr) {
+            const key = `${kid}_tasks_${dateStr}`;
+            return parseTaskData(localStorage.getItem(key));
+        }
+
+        function getTaskData(kid) {
+            return getTaskDataForDate(kid, getCurrentDate());
+        }
+
+        function saveTaskData(kid, data) {
             const key = `${kid}_tasks_${getCurrentDate()}`;
-            const data = JSON.parse(localStorage.getItem(key) || '[]');
-            return data.includes(index);
+            localStorage.setItem(key, JSON.stringify(data));
+        }
+
+        function getTaskStatus(kid, index) {
+            const data = getTaskData(kid);
+            if (data.yes.includes(index)) return 'yes';
+            if (data.no.includes(index)) return 'no';
+            return 'none';
+        }
+
+        function getTaskPointsFromData(taskData) {
+            return taskData.yes.length - taskData.no.length;
+        }
+
+        // Set task choice to Yes/No. Clicking the same choice again clears it.
+        function setTaskChoice(kid, index, choice) {
+            let data = getTaskData(kid);
+
+            data.yes = data.yes.filter(i => i !== index);
+            data.no = data.no.filter(i => i !== index);
+
+            if (choice === 'yes' && getTaskStatus(kid, index) !== 'yes') {
+                data.yes.push(index);
+            } else if (choice === 'no' && getTaskStatus(kid, index) !== 'no') {
+                data.no.push(index);
+            }
+
+            saveTaskData(kid, data);
+
+            renderTasks(kid);
+            updatePoints(kid);
+            updateMotivation(kid);
+            renderCalendar(kid);
+
+            const taskEl = document.getElementById(`${kid}-task-${index}`);
+            taskEl.classList.add('bounce');
+            setTimeout(() => taskEl.classList.remove('bounce'), 500);
         }
 
         // Check if extra is completed
@@ -1229,33 +1467,9 @@
 
         // Check if day is completed
         function isDayCompleted(kid, day) {
-            const key = `${kid}_tasks_${day}`;
-            const data = JSON.parse(localStorage.getItem(key) || '[]');
-            return data.length === DAILY_TASKS.length;
-        }
-
-        // Toggle Task
-        function toggleTask(kid, index) {
-            const key = `${kid}_tasks_${getCurrentDate()}`;
-            let data = JSON.parse(localStorage.getItem(key) || '[]');
-
-            if (data.includes(index)) {
-                data = data.filter(i => i !== index);
-            } else {
-                data.push(index);
-            }
-
-            localStorage.setItem(key, JSON.stringify(data));
-
-            renderTasks(kid);
-            updatePoints(kid);
-            updateMotivation(kid);
-            renderCalendar(kid);
-
-            // Visual feedback
-            const taskEl = document.getElementById(`${kid}-task-${index}`);
-            taskEl.classList.add('bounce');
-            setTimeout(() => taskEl.classList.remove('bounce'), 500);
+            const dayDate = `${day}-${CURRENT_MONTH}-${CURRENT_YEAR}`;
+            const taskData = getTaskDataForDate(kid, dayDate);
+            return (taskData.yes.length + taskData.no.length) === DAILY_TASKS.length;
         }
 
         // Toggle Extra Perk
@@ -1316,21 +1530,21 @@
 
         // Update Points
         function updatePoints(kid) {
-            const tasksKey = `${kid}_tasks_${getCurrentDate()}`;
             const extrasKey = `${kid}_extras_${getCurrentDate()}`;
             const penaltiesKey = `${kid}_penalties_${getCurrentDate()}`;
 
-            const taskCount = JSON.parse(localStorage.getItem(tasksKey) || '[]').length;
+            const taskData = getTaskData(kid);
             const extraCount = JSON.parse(localStorage.getItem(extrasKey) || '[]').length;
             const penaltyCount = JSON.parse(localStorage.getItem(penaltiesKey) || '[]').length;
 
-            const taskPoints = taskCount === DAILY_TASKS.length ? 10 : taskCount;
+            const taskPoints = getTaskPointsFromData(taskData);
             const extraPoints = extraCount;
             const penaltyPoints = penaltyCount; // Each penalty = -1 point
-            const totalPoints = Math.max(0, taskPoints + extraPoints - penaltyPoints); // Ensure never goes below 0
+            const totalPoints = taskPoints + extraPoints - penaltyPoints;
 
+            document.getElementById(`${kid}-task-net`).textContent = `Net task points for today: ${taskPoints}`;
             document.getElementById(`${kid}-points`).textContent = totalPoints;
-            document.getElementById(`${kid}-aud`).textContent = `$${totalPoints} AUD`;
+            document.getElementById(`${kid}-aud`).textContent = formatAUD(totalPoints, true);
 
             // Update Level
             let level = 'Hero';
@@ -1341,9 +1555,11 @@
 
             // Update Monthly Points
             const monthlyPoints = calculateMonthlyPoints(kid);
-            document.getElementById(`${kid}-monthly`).textContent = `April Points: ${monthlyPoints}`;
+            document.getElementById(`${kid}-monthly`).textContent = `${getCurrentMonthName()} Points: ${monthlyPoints}`;
 
             updateTotalPoints();
+            renderDayHistory();
+            renderMonthlyHistory();
         }
 
         // Calculate Monthly Points
@@ -1356,12 +1572,12 @@
                 const extrasKey = `${kid}_extras_${day}-${CURRENT_MONTH}-${CURRENT_YEAR}`;
                 const penaltiesKey = `${kid}_penalties_${day}-${CURRENT_MONTH}-${CURRENT_YEAR}`;
 
-                const taskCount = JSON.parse(localStorage.getItem(tasksKey) || '[]').length;
+                const taskData = parseTaskData(localStorage.getItem(tasksKey));
                 const extraCount = JSON.parse(localStorage.getItem(extrasKey) || '[]').length;
                 const penaltyCount = JSON.parse(localStorage.getItem(penaltiesKey) || '[]').length;
 
-                const taskPoints = taskCount === DAILY_TASKS.length ? 10 : taskCount;
-                const dayPoints = Math.max(0, taskPoints + extraCount - penaltyCount); // Ensure never goes below 0
+                const taskPoints = getTaskPointsFromData(taskData);
+                const dayPoints = taskPoints + extraCount - penaltyCount;
                 total += dayPoints;
             }
 
@@ -1377,7 +1593,129 @@
             });
 
             document.getElementById('totalPoints').textContent = total;
-            document.getElementById('totalAUD').textContent = `$${total}`;
+            document.getElementById('totalAUD').textContent = formatAUD(total, false);
+        }
+
+        function formatAUD(points, includeSuffix) {
+            const aud = points / POINTS_PER_AUD;
+            const signPrefix = aud < 0 ? '-$' : '$';
+            const formatted = `${signPrefix}${Math.abs(aud).toFixed(2)}`;
+            return includeSuffix ? `${formatted} AUD` : formatted;
+        }
+
+        function getCurrentMonthName() {
+            return new Date(CURRENT_YEAR, CURRENT_MONTH - 1, 1).toLocaleString('en-US', { month: 'long' });
+        }
+
+        function getISODateFromStorageDate(dateStr) {
+            const [day, month, year] = dateStr.split('-').map(Number);
+            return `${year}-${String(month).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+        }
+
+        function getStorageDateFromISODate(isoDate) {
+            const [year, month, day] = isoDate.split('-').map(Number);
+            return `${day}-${month}-${year}`;
+        }
+
+        function getDisplayName(kid) {
+            return kid === 'advik' ? 'Advik' : 'Viaan';
+        }
+
+        function getDayPointsForDate(kid, dateStr) {
+            const taskData = getTaskDataForDate(kid, dateStr);
+            const extras = JSON.parse(localStorage.getItem(`${kid}_extras_${dateStr}`) || '[]').length;
+            const penalties = JSON.parse(localStorage.getItem(`${kid}_penalties_${dateStr}`) || '[]').length;
+            const taskPoints = getTaskPointsFromData(taskData);
+            const total = taskPoints + extras - penalties;
+
+            return {
+                taskPoints,
+                extras,
+                penalties,
+                total,
+            };
+        }
+
+        function initHistoryView() {
+            const dateInput = document.getElementById('historyDate');
+            const monthInput = document.getElementById('historyMonth');
+
+            if (!dateInput || !monthInput) {
+                return;
+            }
+
+            dateInput.value = getISODateFromStorageDate(getCurrentDate());
+            monthInput.value = `${CURRENT_YEAR}-${String(CURRENT_MONTH).padStart(2, '0')}`;
+
+            dateInput.onchange = () => renderDayHistory();
+            monthInput.onchange = () => renderMonthlyHistory();
+
+            renderDayHistory();
+            renderMonthlyHistory();
+        }
+
+        function renderDayHistory() {
+            const dateInput = document.getElementById('historyDate');
+            if (!dateInput || !dateInput.value) {
+                return;
+            }
+
+            const storageDate = getStorageDateFromISODate(dateInput.value);
+
+            KIDS.forEach(kid => {
+                const info = getDayPointsForDate(kid, storageDate);
+                const card = document.getElementById(`${kid}-day-summary`);
+                if (!card) {
+                    return;
+                }
+
+                card.innerHTML = `
+                    <strong>${getDisplayName(kid)} - ${dateInput.value}</strong>
+                    Task Net: ${info.taskPoints} points<br>
+                    Extras: +${info.extras} points<br>
+                    Penalties: -${info.penalties} points<br>
+                    Total: ${info.total} points (${formatAUD(info.total, true)})
+                `;
+            });
+        }
+
+        function renderMonthlyHistory() {
+            const monthInput = document.getElementById('historyMonth');
+            const tableBody = document.getElementById('historyMonthBody');
+            const totalEl = document.getElementById('historyMonthTotal');
+
+            if (!monthInput || !monthInput.value || !tableBody || !totalEl) {
+                return;
+            }
+
+            const [yearStr, monthStr] = monthInput.value.split('-');
+            const year = Number(yearStr);
+            const month = Number(monthStr);
+            const daysInMonth = new Date(year, month, 0).getDate();
+
+            let combinedPoints = 0;
+            tableBody.innerHTML = '';
+
+            KIDS.forEach(kid => {
+                let monthPoints = 0;
+
+                for (let day = 1; day <= daysInMonth; day++) {
+                    const dateStr = `${day}-${month}-${year}`;
+                    monthPoints += getDayPointsForDate(kid, dateStr).total;
+                }
+
+                combinedPoints += monthPoints;
+
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${getDisplayName(kid)}</td>
+                    <td>${monthPoints}</td>
+                    <td>${formatAUD(monthPoints, true)}</td>
+                `;
+                tableBody.appendChild(row);
+            });
+
+            totalEl.textContent = `Combined Monthly Total: ${combinedPoints} points (${formatAUD(combinedPoints, true)})`;
         }
 
         // Update Motivation
@@ -1386,7 +1724,9 @@
             const message = MOTIVATIONAL_MESSAGES[Math.floor(Math.random() * MOTIVATIONAL_MESSAGES.length)];
             
             let customMessage = message;
-            if (points === 0) {
+            if (points < 0) {
+                customMessage = '💡 Tough day. Reset and bounce back stronger!';
+            } else if (points === 0) {
                 customMessage = '🌟 Start your day strong! 💪';
             } else if (points === 10) {
                 customMessage = '🎉 All tasks done! Great job! 🏆';
@@ -1408,8 +1748,10 @@
             if (confirm(`Reset ${kid === 'advik' ? 'Advik' : 'Viaan'}'s tasks for today?`)) {
                 localStorage.removeItem(`${kid}_tasks_${getCurrentDate()}`);
                 localStorage.removeItem(`${kid}_extras_${getCurrentDate()}`);
+                localStorage.removeItem(`${kid}_penalties_${getCurrentDate()}`);
                 renderTasks(kid);
                 renderExtras(kid);
+                renderPenalties(kid);
                 updatePoints(kid);
                 updateMotivation(kid);
                 alert('Daily tasks reset! Time for a fresh start! 🌟');
@@ -1418,24 +1760,32 @@
 
         // Reset All
         function resetAll() {
-            if (confirm('Are you sure you want to reset EVERYTHING for a new month? This cannot be undone!')) {
-                // Keep hero selections, clear only task data
-                const advikHero = localStorage.getItem('advik_hero');
-                const viaanHero = localStorage.getItem('viaan_hero');
-                
-                localStorage.clear();
-                
-                // Restore hero selections
-                if (advikHero) localStorage.setItem('advik_hero', advikHero);
-                if (viaanHero) localStorage.setItem('viaan_hero', viaanHero);
-                
-                location.reload();
+            if (confirm(`Reset ONLY ${getCurrentMonthName()} data? Previous months will be kept for history.`)) {
+                const monthSuffix = `-${CURRENT_MONTH}-${CURRENT_YEAR}`;
+                const keysToRemove = [];
+
+                for (let i = 0; i < localStorage.length; i++) {
+                    const key = localStorage.key(i);
+                    if (!key) continue;
+
+                    const isKidData = key.startsWith('advik_tasks_') || key.startsWith('advik_extras_') || key.startsWith('advik_penalties_') ||
+                                      key.startsWith('viaan_tasks_') || key.startsWith('viaan_extras_') || key.startsWith('viaan_penalties_');
+
+                    if (isKidData && key.endsWith(monthSuffix)) {
+                        keysToRemove.push(key);
+                    }
+                }
+
+                keysToRemove.forEach(key => localStorage.removeItem(key));
+
+                loadDashboard();
+                alert(`${getCurrentMonthName()} data cleared. Previous months are preserved.`);
             }
         }
 
         // Show Celebration
         function showCelebration(kid) {
-            alert(`🎉 Amazing! You completed a bonus perk! 🌟 +1 AUD`);
+            alert(`🎉 Amazing! You completed a bonus perk! 🌟 +1 Point (= $0.10 AUD)`);
         }
 
         // Load Data
