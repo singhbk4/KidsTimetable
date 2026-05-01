@@ -1,4 +1,4 @@
-<!DOCTYPE html> # Update1
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -11,9 +11,25 @@
             box-sizing: border-box;
         }
 
+        :root {
+            --bg-grad-start: #fff4d6;
+            --bg-grad-mid: #ffd5cc;
+            --bg-grad-end: #cde7ff;
+            --header-grad-start: #ff6b6b;
+            --header-grad-mid: #feca57;
+            --header-grad-end: #48dbfb;
+            --kid1-accent: #ff4d8d;
+            --kid2-accent: #2d7ff9;
+            --ach-grad-start: #ff7a18;
+            --ach-grad-mid: #ffb347;
+            --ach-grad-end: #24c6dc;
+            --ach-title: #f8fafc;
+            --badge-highlight: #ffe066;
+        }
+
         body {
             font-family: 'Comic Sans MS', 'Trebuchet MS', cursive, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            background: linear-gradient(135deg, var(--bg-grad-start) 0%, var(--bg-grad-mid) 55%, var(--bg-grad-end) 100%);
             min-height: 100vh;
             padding: 20px;
             overflow-x: hidden;
@@ -59,7 +75,7 @@
             text-align: center;
             font-size: 2.5em;
             margin-bottom: 15px;
-            background: linear-gradient(90deg, #FF6B6B, #FFD93D);
+            background: linear-gradient(90deg, #1f4b7a, #2f86c7);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -180,14 +196,14 @@
 
         /* Header */
         .header {
-            background: linear-gradient(90deg, #FF6B6B 0%, #FFD93D 50%, #6BCB77 100%);
+            background: linear-gradient(90deg, var(--header-grad-start) 0%, var(--header-grad-mid) 50%, var(--header-grad-end) 100%);
             padding: 25px;
             border-radius: 20px;
             text-align: center;
             margin-bottom: 30px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            box-shadow: 0 10px 24px rgba(15, 23, 42, 0.2);
             color: white;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.22);
         }
 
         .header h1 {
@@ -248,14 +264,14 @@
             border: 5px solid;
         }
 
-        .kid-card.advik {
-            border-color: #FF6B9D;
-            background: linear-gradient(to bottom, #FFF5F7 0%, white 100%);
+        .kid-card.kid1 {
+            border-color: var(--kid1-accent);
+            background: linear-gradient(to bottom, #fff8fb 0%, white 100%);
         }
 
-        .kid-card.viaan {
-            border-color: #4A90E2;
-            background: linear-gradient(to bottom, #F0F8FF 0%, white 100%);
+        .kid-card.kid2 {
+            border-color: var(--kid2-accent);
+            background: linear-gradient(to bottom, #f4f8fe 0%, white 100%);
         }
 
         .kid-header {
@@ -265,14 +281,14 @@
             border-bottom: 3px dashed;
         }
 
-        .kid-card.advik .kid-header {
-            border-bottom-color: #FF6B9D;
-            color: #FF6B9D;
+        .kid-card.kid1 .kid-header {
+            border-bottom-color: var(--kid1-accent);
+            color: var(--kid1-accent);
         }
 
-        .kid-card.viaan .kid-header {
-            border-bottom-color: #4A90E2;
-            color: #4A90E2;
+        .kid-card.kid2 .kid-header {
+            border-bottom-color: var(--kid2-accent);
+            color: var(--kid2-accent);
         }
 
         .kid-name {
@@ -320,11 +336,11 @@
             border: 2px solid;
         }
 
-        .kid-card.advik .points-display {
+        .kid-card.kid1 .points-display {
             border-color: #FF6B9D;
         }
 
-        .kid-card.viaan .points-display {
+        .kid-card.kid2 .points-display {
             border-color: #4A90E2;
         }
 
@@ -334,11 +350,11 @@
             margin: 10px 0;
         }
 
-        .kid-card.advik .points-number {
+        .kid-card.kid1 .points-number {
             color: #FF6B9D;
         }
 
-        .kid-card.viaan .points-number {
+        .kid-card.kid2 .points-number {
             color: #4A90E2;
         }
 
@@ -353,11 +369,11 @@
             margin-top: 8px;
         }
 
-        .kid-card.advik .aud-equivalent {
+        .kid-card.kid1 .aud-equivalent {
             color: #FF6B9D;
         }
 
-        .kid-card.viaan .aud-equivalent {
+        .kid-card.kid2 .aud-equivalent {
             color: #4A90E2;
         }
 
@@ -375,11 +391,11 @@
             gap: 10px;
         }
 
-        .kid-card.advik .section-title {
+        .kid-card.kid1 .section-title {
             color: #FF6B9D;
         }
 
-        .kid-card.viaan .section-title {
+        .kid-card.kid2 .section-title {
             color: #4A90E2;
         }
 
@@ -485,11 +501,11 @@
             color: #555;
         }
 
-        .kid-card.advik .task-net-summary {
+        .kid-card.kid1 .task-net-summary {
             color: #C4457A;
         }
 
-        .kid-card.viaan .task-net-summary {
+        .kid-card.kid2 .task-net-summary {
             color: #2D6FB8;
         }
 
@@ -500,11 +516,11 @@
             border-top: 2px dashed;
         }
 
-        .kid-card.advik .calendar-section {
+        .kid-card.kid1 .calendar-section {
             border-top-color: #FF6B9D;
         }
 
-        .kid-card.viaan .calendar-section {
+        .kid-card.kid2 .calendar-section {
             border-top-color: #4A90E2;
         }
 
@@ -514,11 +530,11 @@
             margin-bottom: 12px;
         }
 
-        .kid-card.advik .calendar-title {
+        .kid-card.kid1 .calendar-title {
             color: #FF6B9D;
         }
 
-        .kid-card.viaan .calendar-title {
+        .kid-card.kid2 .calendar-title {
             color: #4A90E2;
         }
 
@@ -553,11 +569,11 @@
             font-weight: bold;
         }
 
-        .kid-card.advik .calendar-day.today {
+        .kid-card.kid1 .calendar-day.today {
             border-color: #FF6B9D;
         }
 
-        .kid-card.viaan .calendar-day.today {
+        .kid-card.kid2 .calendar-day.today {
             border-color: #4A90E2;
         }
 
@@ -801,6 +817,240 @@
             animation: bounce 0.5s ease;
         }
 
+        /* Dark Mode Styles */
+        body.dark-mode {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+        }
+
+        body.dark-mode .header {
+            background: linear-gradient(90deg, #2d3436 0%, #636e72 50%, #2d3436 100%);
+        }
+
+        body.dark-mode .kid-card {
+            background: #2d3436;
+            color: white;
+        }
+
+        body.dark-mode .kid-card.kid1 {
+            border-color: #ff6b6b;
+            background: linear-gradient(to bottom, #2d2d4d 0%, #2d3436 100%);
+        }
+
+        body.dark-mode .kid-card.kid2 {
+            border-color: #74b9ff;
+            background: linear-gradient(to bottom, #2d3a4d 0%, #2d3436 100%);
+        }
+
+        body.dark-mode .history-section {
+            background: #2d3436;
+            color: white;
+        }
+
+        body.dark-mode .history-table th {
+            background: #1a1a2e;
+            color: white;
+        }
+
+        body.dark-mode .history-table td {
+            color: white;
+        }
+
+        body.dark-mode .history-day-card {
+            background: #1a1a2e;
+            border-color: #636e72;
+            color: white;
+        }
+
+        body.dark-mode .task-item {
+            background: #1a1a2e;
+            color: white;
+        }
+
+        body.dark-mode .extra-perk-item,
+        body.dark-mode .penalty-item {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
+        /* Settings Panel */
+        .settings-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 10px 15px;
+            background: linear-gradient(135deg, #1f4b7a, #2f6da5);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2em;
+            cursor: pointer;
+            z-index: 999;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+
+        .settings-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+
+        .settings-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1001;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .settings-modal.show {
+            display: flex;
+        }
+
+        .settings-content {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 500px;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        body.dark-mode .settings-content {
+            background: #2d3436;
+            color: white;
+        }
+
+        .settings-content h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        body.dark-mode .settings-content h2 {
+            color: white;
+        }
+
+        .settings-group {
+            margin-bottom: 20px;
+        }
+
+        .settings-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        body.dark-mode .settings-group label {
+            color: #ccc;
+        }
+
+        .settings-group input {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 1em;
+            font-family: inherit;
+        }
+
+        body.dark-mode .settings-group input {
+            background: #1a1a2e;
+            border-color: #636e72;
+            color: white;
+        }
+
+        .settings-close {
+            float: right;
+            font-size: 1.5em;
+            cursor: pointer;
+            color: #666;
+        }
+
+        body.dark-mode .settings-close {
+            color: #ccc;
+        }
+
+        .settings-close:hover {
+            color: #333;
+        }
+
+        /* Achievements Section */
+        .achievements-section {
+            margin-top: 20px;
+            padding: 20px;
+            background: linear-gradient(135deg, var(--ach-grad-start) 0%, var(--ach-grad-mid) 55%, var(--ach-grad-end) 100%);
+            border-radius: 15px;
+            text-align: center;
+            color: white;
+            border: 1px solid rgba(148, 163, 184, 0.28);
+            box-shadow: 0 12px 28px rgba(15, 23, 42, 0.2);
+        }
+
+        body.dark-mode .achievements-section {
+            background: linear-gradient(135deg, #0b1220 0%, #172236 60%, #243247 100%);
+            border-color: rgba(148, 163, 184, 0.3);
+        }
+
+        .achievements-title {
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: var(--ach-title);
+            letter-spacing: 0.02em;
+        }
+
+        .badges-container {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .badge {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-width: 110px;
+            padding: 12px 14px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            font-size: 0.9em;
+            cursor: help;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(3px);
+        }
+
+        .badge:hover {
+            transform: translateY(-3px);
+            border-color: var(--badge-highlight);
+            background: rgba(255, 255, 255, 0.16);
+            box-shadow: 0 8px 16px rgba(15, 23, 42, 0.25);
+        }
+
+        .badge.locked {
+            opacity: 0.45;
+            filter: grayscale(35%);
+        }
+
+        .badge-icon {
+            font-size: 2em;
+            margin-bottom: 5px;
+        }
+
+        .badge-name {
+            font-weight: bold;
+            font-size: 0.8em;
+            letter-spacing: 0.02em;
+            text-transform: uppercase;
+        }
+
         /* Responsive adjustments */
         @media (max-width: 768px) {
             .header h1 {
@@ -823,80 +1073,95 @@
             .history-day-grid {
                 grid-template-columns: 1fr;
             }
+
+            .settings-btn {
+                top: 10px;
+                right: 10px;
+                padding: 8px 12px;
+                font-size: 1em;
+            }
+
+            .settings-content {
+                max-width: 90%;
+                max-height: 70vh;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Settings Button -->
+    <button class="settings-btn" onclick="openSettings()">⚙️ Settings</button>
+
+    <!-- Settings Modal -->
+    <div id="settingsModal" class="settings-modal">
+        <div class="settings-content">
+            <span class="settings-close" onclick="closeSettings()">&times;</span>
+            <h2>⚙️ Settings</h2>
+            
+            <div class="settings-group">
+                <label>
+                    <input type="checkbox" id="darkModeToggle">
+                    🌙 Dark Mode
+                </label>
+            </div>
+
+            <div class="settings-group">
+                <label for="taskRate">📋 Daily Task points per $1 AUD:</label>
+                <input type="number" id="taskRate" min="1" max="100" value="10">
+                <small style="color:#888;">Default: 10 task points = $1.00 AUD</small>
+            </div>
+
+            <div class="settings-group">
+                <label for="extraPerkCents">✨ Extra Perk value (cents per perk):</label>
+                <input type="number" id="extraPerkCents" min="1" max="500" value="20">
+                <small style="color:#888;">Default: 1 Extra Perk = $0.20 AUD</small>
+            </div>
+
+            <div class="settings-group">
+                <label for="penaltyCents">⚠️ Penalty deduction (cents per penalty):</label>
+                <input type="number" id="penaltyCents" min="1" max="500" value="10">
+                <small style="color:#888;">Default: 1 Penalty = $0.10 AUD</small>
+            </div>
+
+            <div class="settings-group">
+                <label>🎨 Kid Colors:</label>
+                <div id="kidColorSettings"></div>
+            </div>
+
+            <div class="settings-group" style="display: flex; gap: 10px;">
+                <button onclick="applySettings()" style="flex: 1; padding: 10px; background: linear-gradient(135deg, #20bf55, #01baef); color: white; border: none; border-radius: 10px; cursor: pointer; font-weight: bold;">
+                    ✅ OK Save Settings
+                </button>
+                <button onclick="closeSettings()" style="flex: 1; padding: 10px; background: #94a3b8; color: white; border: none; border-radius: 10px; cursor: pointer; font-weight: bold;">
+                    Cancel
+                </button>
+            </div>
+
+            <div class="settings-group">
+                <button onclick="exportData()" style="width: 100%; padding: 10px; background: #667eea; color: white; border: none; border-radius: 10px; cursor: pointer; font-weight: bold;">
+                    📥 Export Data as JSON
+                </button>
+            </div>
+
+            <div class="settings-group">
+                <button onclick="clearAllData()" style="width: 100%; padding: 10px; background: #ff6b6b; color: white; border: none; border-radius: 10px; cursor: pointer; font-weight: bold; margin-top: 10px;">
+                    🗑️ Clear All Data
+                </button>
+            </div>
+        </div>
+    </div>
+
     <!-- Superhero Selection Modal -->
     <div id="heroSelectionModal" class="hero-selection-modal">
         <div class="hero-selection-content">
             <h1>🦸 Choose Your Superhero! 🦸</h1>
             <p>Select which superhero YOU want to be!</p>
-            
-            <div class="hero-groups">
-                <div class="hero-group">
-                    <h2>🔴 AVENGERS 🔴</h2>
-                    <div class="hero-options">
-                        <div class="hero-option" onclick="selectHero('advik', 'iron-man', this)">
-                            <div class="hero-emoji">🦾</div>
-                            <div class="hero-name">Iron Man</div>
-                        </div>
-                        <div class="hero-option" onclick="selectHero('advik', 'captain-america', this)">
-                            <div class="hero-emoji">🛡️</div>
-                            <div class="hero-name">Captain America</div>
-                        </div>
-                        <div class="hero-option" onclick="selectHero('advik', 'thor', this)">
-                            <div class="hero-emoji">⚡</div>
-                            <div class="hero-name">Thor</div>
-                        </div>
-                        <div class="hero-option" onclick="selectHero('advik', 'hulk', this)">
-                            <div class="hero-emoji">💚</div>
-                            <div class="hero-name">Hulk</div>
-                        </div>
-                        <div class="hero-option" onclick="selectHero('advik', 'black-widow', this)">
-                            <div class="hero-emoji">🏹</div>
-                            <div class="hero-name">Black Widow</div>
-                        </div>
-                        <div class="hero-option" onclick="selectHero('advik', 'hawkeye', this)">
-                            <div class="hero-emoji">🎯</div>
-                            <div class="hero-name">Hawkeye</div>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="hero-group">
-                    <h2>🔵 DC UNIVERSE 🔵</h2>
-                    <div class="hero-options">
-                        <div class="hero-option" onclick="selectHero('viaan', 'batman', this)">
-                            <div class="hero-emoji">🦇</div>
-                            <div class="hero-name">Batman</div>
-                        </div>
-                        <div class="hero-option" onclick="selectHero('viaan', 'superman', this)">
-                            <div class="hero-emoji">🔵</div>
-                            <div class="hero-name">Superman</div>
-                        </div>
-                        <div class="hero-option" onclick="selectHero('viaan', 'wonder-woman', this)">
-                            <div class="hero-emoji">👸</div>
-                            <div class="hero-name">Wonder Woman</div>
-                        </div>
-                        <div class="hero-option" onclick="selectHero('viaan', 'flash', this)">
-                            <div class="hero-emoji">🔴</div>
-                            <div class="hero-name">The Flash</div>
-                        </div>
-                        <div class="hero-option" onclick="selectHero('viaan', 'aquaman', this)">
-                            <div class="hero-emoji">🔱</div>
-                            <div class="hero-name">Aquaman</div>
-                        </div>
-                        <div class="hero-option" onclick="selectHero('viaan', 'green-lantern', this)">
-                            <div class="hero-emoji">💚</div>
-                            <div class="hero-name">Green Lantern</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <p id="heroSelectionKidLabel" style="font-weight: bold; margin-bottom: 12px; text-align: center;"></p>
+            <div class="hero-options" id="heroOptions"></div>
 
             <div class="hero-selection-footer">
-                <p id="selectionState">Please select a superhero for <strong>Advik</strong></p>
+                <p id="selectionState"></p>
                 <button id="submitBtn" class="submit-hero-btn" onclick="submitHeroSelection()" style="display:none;">
                     ✅ START THE CHALLENGE!
                 </button>
@@ -921,122 +1186,14 @@
         </div>
     </div>
 
-    <!-- Main Container -->
-    <div class="container">
-        <!-- Advik Card -->
-        <div class="kid-card advik">
-            <div class="kid-header">
-                <div class="hero-badge" id="advik-hero-emoji">🦸‍♂️</div>
-                <div class="kid-name" id="advik-name">Advik</div>
-                <div id="advik-hero-name" style="font-size: 0.9em; color: #999; margin-bottom: 10px;">Choose a superhero</div>
-                <div class="superhero-level" id="advik-level">Level: Hero</div>
-                <button class="change-hero-btn" onclick="changeHero('advik')">Change Superhero</button>
-            </div>
-
-            <!-- Points Display -->
-            <div class="points-display">
-                <div class="points-label">Today's Points</div>
-                <div class="points-number" id="advik-points">0</div>
-                <div class="points-label">Yes = +1 | No = -1 per task</div>
-                <div class="aud-equivalent" id="advik-aud">$0.00 AUD</div>
-            </div>
-
-            <!-- Daily Tasks -->
-            <div class="tasks-section">
-                <div class="section-title">📋 Daily Tasks</div>
-                <div id="advik-tasks"></div>
-                <div class="task-net-summary" id="advik-task-net">Net task points for today: 0</div>
-            </div>
-
-            <!-- Extra Perks -->
-            <div class="extras-section">
-                <div class="section-title">✨ Extra Perks (Bonus +1 Point)</div>
-                <div id="advik-extras"></div>
-            </div>
-
-            <!-- Penalties -->
-            <div class="penalties-section">
-                <div class="section-title">⚠️ Penalties (-1 Point Each)</div>
-                <div id="advik-penalties"></div>
-            </div>
-
-            <!-- Motivational Message -->
-            <div class="motivational-message" id="advik-motivation">
-                Keep going, you're doing great! 💪
-            </div>
-
-            <!-- Monthly Calendar -->
-            <div class="calendar-section">
-                <div class="calendar-title" id="advik-calendar-title">📊 Monthly Completion</div>
-                <div class="calendar-grid" id="advik-calendar"></div>
-                <div class="monthly-points" id="advik-monthly">
-                    Monthly Points: 0
-                </div>
-            </div>
-
-            <!-- Reset Button -->
-            <button class="reset-button" onclick="resetDaily('advik')">
-                Reset Today's Tasks
-            </button>
-        </div>
-
-        <!-- Viaan Card -->
-        <div class="kid-card viaan">
-            <div class="kid-header">
-                <div class="hero-badge" id="viaan-hero-emoji">🦸‍♂️</div>
-                <div class="kid-name" id="viaan-name">Viaan</div>
-                <div id="viaan-hero-name" style="font-size: 0.9em; color: #999; margin-bottom: 10px;">Choose a superhero</div>
-                <div class="superhero-level" id="viaan-level">Level: Hero</div>
-                <button class="change-hero-btn" onclick="changeHero('viaan')">Change Superhero</button>
-            </div>
-
-            <!-- Points Display -->
-            <div class="points-display">
-                <div class="points-label">Today's Points</div>
-                <div class="points-number" id="viaan-points">0</div>
-                <div class="points-label">Yes = +1 | No = -1 per task</div>
-                <div class="aud-equivalent" id="viaan-aud">$0.00 AUD</div>
-            </div>
-
-            <!-- Daily Tasks -->
-            <div class="tasks-section">
-                <div class="section-title">📋 Daily Tasks</div>
-                <div id="viaan-tasks"></div>
-                <div class="task-net-summary" id="viaan-task-net">Net task points for today: 0</div>
-            </div>
-
-            <!-- Extra Perks -->
-            <div class="extras-section">
-                <div class="section-title">✨ Extra Perks (Bonus +1 Point)</div>
-                <div id="viaan-extras"></div>
-            </div>
-
-            <!-- Penalties -->
-            <div class="penalties-section">
-                <div class="section-title">⚠️ Penalties (-1 Point Each)</div>
-                <div id="viaan-penalties"></div>
-            </div>
-
-            <!-- Motivational Message -->
-            <div class="motivational-message" id="viaan-motivation">
-                Keep going, you're doing great! 💪
-            </div>
-
-            <!-- Monthly Calendar -->
-            <div class="calendar-section">
-                <div class="calendar-title" id="viaan-calendar-title">📊 Monthly Completion</div>
-                <div class="calendar-grid" id="viaan-calendar"></div>
-                <div class="monthly-points" id="viaan-monthly">
-                    Monthly Points: 0
-                </div>
-            </div>
-
-            <!-- Reset Button -->
-            <button class="reset-button" onclick="resetDaily('viaan')">
-                Reset Today's Tasks
-            </button>
-        </div>
+    <!-- Achievements Section -->
+    <div class="achievements-section" id="achievementsSection">
+        <div class="achievements-title">🏆 Achievements & Badges</div>
+        <div class="badges-container" id="badgesContainer"></div>
     </div>
+
+    <!-- Main Container -->
+    <div class="container" id="kidCardsContainer"></div>
 
     <!-- Global Reset -->
     <div class="global-reset">
@@ -1054,10 +1211,7 @@
             <input type="month" id="historyMonth">
         </div>
 
-        <div class="history-day-grid">
-            <div class="history-day-card" id="advik-day-summary"></div>
-            <div class="history-day-card" id="viaan-day-summary"></div>
-        </div>
+        <div class="history-day-grid" id="historyDayGrid"></div>
 
         <table class="history-table">
             <thead>
@@ -1073,6 +1227,250 @@
     </div>
 
     <script>
+        const DEFAULT_KID_COLORS = ['#FF6B9D', '#4A90E2', '#20BF55', '#FF8C42', '#8A5CF6', '#00B8D9', '#FF5D8F', '#38B000'];
+
+        // One-time migration: legacy internal ids (a/v) -> neutral ids (kid1/kid2)
+        // Get kid count and names at startup
+        function initializeKidConfigs() {
+            const storedCount = parseInt(localStorage.getItem('kids_count') || '0', 10);
+            const storedNames = JSON.parse(localStorage.getItem('kid_names') || '[]');
+
+            let kidCount = storedCount;
+            let names = Array.isArray(storedNames) ? storedNames : [];
+
+            if (!kidCount || names.length !== kidCount) {
+                const countInput = parseInt(prompt('How many kids do you want to track?', '2'), 10);
+                kidCount = Number.isInteger(countInput) && countInput > 0 && countInput <= 8 ? countInput : 2;
+                names = [];
+
+                for (let i = 1; i <= kidCount; i++) {
+                    const enteredName = prompt(`Enter kid ${i} name:`, `Kid ${i}`) || `Kid ${i}`;
+                    names.push(enteredName.trim() || `Kid ${i}`);
+                }
+
+                localStorage.setItem('kids_count', String(kidCount));
+                localStorage.setItem('kid_names', JSON.stringify(names));
+            }
+
+            names = names.slice(0, kidCount);
+
+            const configs = names.map((name, index) => {
+                const id = `kid${index + 1}`;
+                return {
+                    id,
+                    name,
+                    color: localStorage.getItem(`${id}_color`) || DEFAULT_KID_COLORS[index % DEFAULT_KID_COLORS.length],
+                };
+            });
+
+            localStorage.setItem('kids_config', JSON.stringify(configs));
+
+            return configs;
+        }
+
+        let kidConfigs = initializeKidConfigs();
+
+        // Settings & Achievements
+        let TASK_POINTS_PER_AUD = localStorage.getItem('taskRate') ? parseInt(localStorage.getItem('taskRate')) : 10;
+        let EXTRA_PERK_CENTS = localStorage.getItem('extraPerkCents') ? parseInt(localStorage.getItem('extraPerkCents')) : 20;
+        let PENALTY_CENTS = localStorage.getItem('penaltyCents') ? parseInt(localStorage.getItem('penaltyCents')) : 10;
+        let darkModeEnabled = localStorage.getItem('darkMode') === 'true';
+
+        // Badge Definitions
+        const BADGES = [
+            { id: 'first-task', icon: '✅', name: '1st Task', desc: 'Complete first task', condition: () => getTotalTasksEverCompleted() >= 1 },
+            { id: 'streak-7', icon: '🔥', name: '7-Day Streak', desc: '7 consecutive days', condition: () => getStreak() >= 7 },
+            { id: 'streak-30', icon: '🌟', name: 'Monthly Legend', desc: '30-day streak', condition: () => getStreak() >= 30 },
+            { id: 'points-100', icon: '💯', name: '100 Points', desc: 'Earn 100 points', condition: () => calculateTotalLifetimePoints() >= 100 },
+            { id: 'points-500', icon: '👑', name: 'Master', desc: 'Earn 500 points', condition: () => calculateTotalLifetimePoints() >= 500 },
+            { id: 'perfect-day', icon: '💎', name: 'Perfect Day', desc: 'No penalties today', condition: () => KIDS.every(kid => JSON.parse(localStorage.getItem(`${kid}_penalties_${getCurrentDate()}`) || '[]').length === 0) },
+            { id: 'extra-perks', icon: '✨', name: 'Extra Achiever', desc: 'Complete 5 extra perks', condition: () => getTotalExtrasEverCompleted() >= 5 },
+        ];
+
+        // Initialize dark mode
+        if (darkModeEnabled) {
+            document.body.classList.add('dark-mode');
+            document.getElementById('darkModeToggle').checked = true;
+        }
+
+        // Settings Functions
+        function openSettings() {
+            document.getElementById('darkModeToggle').checked = darkModeEnabled;
+            document.getElementById('taskRate').value = TASK_POINTS_PER_AUD;
+            document.getElementById('extraPerkCents').value = EXTRA_PERK_CENTS;
+            document.getElementById('penaltyCents').value = PENALTY_CENTS;
+            KIDS.forEach(kid => {
+                const input = document.getElementById(`color-${kid}`);
+                if (input) {
+                    input.value = localStorage.getItem(`${kid}_color`) || getKidConfig(kid).color;
+                }
+            });
+            document.getElementById('settingsModal').classList.add('show');
+        }
+
+        function closeSettings() {
+            document.getElementById('settingsModal').classList.remove('show');
+        }
+
+        function toggleDarkMode() {
+            darkModeEnabled = document.getElementById('darkModeToggle').checked;
+            localStorage.setItem('darkMode', darkModeEnabled);
+            document.body.classList.toggle('dark-mode', darkModeEnabled);
+        }
+
+        function applySettings() {
+            toggleDarkMode();
+            updateAUDRates();
+            KIDS.forEach(updateKidColor);
+            KIDS.forEach(updatePoints);
+            closeSettings();
+            alert('✅ Settings saved successfully!');
+        }
+
+        function updateAUDRates() {
+            const newTaskRate = parseInt(document.getElementById('taskRate').value) || 10;
+            const newExtraCents = parseInt(document.getElementById('extraPerkCents').value) || 20;
+            const newPenaltyCents = parseInt(document.getElementById('penaltyCents').value) || 10;
+            TASK_POINTS_PER_AUD = newTaskRate;
+            EXTRA_PERK_CENTS = newExtraCents;
+            PENALTY_CENTS = newPenaltyCents;
+            localStorage.setItem('taskRate', newTaskRate);
+            localStorage.setItem('extraPerkCents', newExtraCents);
+            localStorage.setItem('penaltyCents', newPenaltyCents);
+            updateTotalPoints();
+        }
+
+        function updateKidColor(kid) {
+            const colorInput = document.getElementById(`color-${kid}`);
+
+            if (!colorInput) return;
+
+            const newColor = colorInput.value;
+            localStorage.setItem(`${kid}_color`, newColor);
+            const config = getKidConfig(kid);
+            if (config) config.color = newColor;
+            localStorage.setItem('kids_config', JSON.stringify(kidConfigs));
+
+            updateKidColorStyle(kid, newColor);
+        }
+
+        function updateKidColorStyle(kid, newColor) {
+            const style = document.getElementById(`${kid}-style`) || document.createElement('style');
+            style.id = `${kid}-style`;
+            style.textContent = `
+                .kid-card.${kid} { border-color: ${newColor} !important; }
+                .kid-card.${kid} .kid-header { border-bottom-color: ${newColor} !important; color: ${newColor} !important; }
+                .kid-card.${kid} .points-display { border-color: ${newColor} !important; }
+                .kid-card.${kid} .points-number,
+                .kid-card.${kid} .aud-equivalent,
+                .kid-card.${kid} .section-title,
+                .kid-card.${kid} .calendar-title,
+                .kid-card.${kid} .task-net-summary { color: ${newColor} !important; }
+                .kid-card.${kid} .calendar-section { border-top-color: ${newColor} !important; }
+                .kid-card.${kid} .calendar-day.today { border-color: ${newColor} !important; }
+            `;
+            document.head.appendChild(style);
+        }
+
+        function exportData() {
+            const data = {};
+            for (let i = 0; i < localStorage.length; i++) {
+                const key = localStorage.key(i);
+                data[key] = localStorage.getItem(key);
+            }
+            const jsonString = JSON.stringify(data, null, 2);
+            const blob = new Blob([jsonString], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `kids-timetable-backup-${new Date().toISOString().slice(0, 10)}.json`;
+            a.click();
+            alert('✅ Data exported successfully!');
+        }
+
+        function clearAllData() {
+            if (confirm('⚠️ This will DELETE ALL DATA! Are you sure?')) {
+                localStorage.clear();
+                alert('All data cleared. Reloading...');
+                location.reload();
+            }
+        }
+
+        // Achievement & Badge Functions
+        function getTotalTasksEverCompleted() {
+            let total = 0;
+            for (let i = 0; i < localStorage.length; i++) {
+                const key = localStorage.key(i);
+                if (key && key.includes('_tasks_')) {
+                    const data = JSON.parse(localStorage.getItem(key) || '{}');
+                    total += (data.yes ? data.yes.length : 0) + (data.no ? data.no.length : 0);
+                }
+            }
+            return total;
+        }
+
+        function getTotalExtrasEverCompleted() {
+            let total = 0;
+            for (let i = 0; i < localStorage.length; i++) {
+                const key = localStorage.key(i);
+                if (key && key.includes('_extras_')) {
+                    total += JSON.parse(localStorage.getItem(key) || '[]').length;
+                }
+            }
+            return total;
+        }
+
+        function calculateTotalLifetimePoints() {
+            let total = 0;
+            for (let i = 0; i < localStorage.length; i++) {
+                const key = localStorage.key(i);
+                if (key && key.includes('_tasks_')) {
+                    const data = JSON.parse(localStorage.getItem(key) || '{}');
+                    total += (data.yes ? data.yes.length : 0) - (data.no ? data.no.length : 0);
+                }
+            }
+            return total;
+        }
+
+        function getStreak() {
+            let streak = 0;
+            const today = new Date();
+            let currentDate = new Date(today);
+            
+            while (true) {
+                const dateStr = `${currentDate.getDate()}-${currentDate.getMonth() + 1}-${currentDate.getFullYear()}`;
+                const allComplete = KIDS.every(kid => {
+                    const data = getTaskDataForDate(kid, dateStr);
+                    return (data.yes.length + data.no.length) === DAILY_TASKS.length;
+                });
+
+                if (allComplete) {
+                    streak++;
+                    currentDate.setDate(currentDate.getDate() - 1);
+                } else {
+                    break;
+                }
+            }
+            return streak;
+        }
+
+        function checkAchievements() {
+            const container = document.getElementById('badgesContainer');
+            container.innerHTML = '';
+            
+            BADGES.forEach(badge => {
+                const unlocked = badge.condition();
+                const badgeEl = document.createElement('div');
+                badgeEl.className = `badge ${unlocked ? '' : 'locked'}`;
+                badgeEl.title = badge.desc;
+                badgeEl.innerHTML = `
+                    <div class="badge-icon">${badge.icon}</div>
+                    <div class="badge-name">${badge.name}</div>
+                `;
+                container.appendChild(badgeEl);
+            });
+        }
+
         // Superhero Data
         const SUPERHERO_DATA = {
             'iron-man': { emoji: '🦾', name: 'Iron Man', universe: 'Avengers' },
@@ -1090,10 +1488,10 @@
         };
 
         // Configuration
-        const KIDS = ['advik', 'viaan'];
+        let KIDS = kidConfigs.map(kid => kid.id);
         const CURRENT_MONTH = new Date().getMonth() + 1; // 1-12
         const CURRENT_YEAR = new Date().getFullYear();
-        const POINTS_PER_AUD = 10;
+        // TASK_POINTS_PER_AUD and EXTRA_PERK_CENTS are dynamic and set in settings
 
         const DAILY_TASKS = [
             { icon: '🪥', name: 'Morning Brush and after Dinner' },
@@ -1147,18 +1545,21 @@
             '🌺 Beautiful progress! 🦋',
         ];
 
-        let currentKidSelecting = 'advik';
+        let currentKidSelecting = KIDS[0];
 
         // Initialize
         function init() {
             updateDateTime();
             setInterval(updateDateTime, 1000);
 
-            // Check if heroes are selected
-            const advikHero = localStorage.getItem('advik_hero');
-            const viaanHero = localStorage.getItem('viaan_hero');
+            renderKidCards();
+            renderKidColorSettings();
+            renderHeroOptions();
 
-            if (advikHero && viaanHero) {
+            // Check if heroes are selected
+            const allHaveHero = KIDS.every(kid => !!localStorage.getItem(`${kid}_hero`));
+
+            if (allHaveHero) {
                 hideHeroSelection();
                 loadDashboard();
             } else {
@@ -1172,6 +1573,9 @@
             document.querySelector('.header').style.display = 'none';
             document.querySelector('.container').style.display = 'none';
             document.querySelector('.global-reset').style.display = 'none';
+            document.querySelector('.history-section').style.display = 'none';
+            document.querySelector('.achievements-section').style.display = 'none';
+            renderHeroOptions();
             updateSelectionState();
         }
 
@@ -1181,10 +1585,12 @@
             document.querySelector('.header').style.display = 'block';
             document.querySelector('.container').style.display = 'grid';
             document.querySelector('.global-reset').style.display = 'block';
+            document.querySelector('.history-section').style.display = 'block';
+            document.querySelector('.achievements-section').style.display = 'block';
         }
 
         // Select Hero
-        function selectHero(kid, heroId, selectedElement) {
+        function selectHero(heroId, selectedElement) {
             // Remove previous selection
             document.querySelectorAll(`#heroSelectionModal .hero-option.selected`).forEach(el => {
                 el.classList.remove('selected');
@@ -1194,52 +1600,170 @@
             selectedElement.classList.add('selected');
 
             // Store selection
-            localStorage.setItem(`${kid}_hero`, heroId);
+            localStorage.setItem(`${currentKidSelecting}_hero`, heroId);
 
-            // Check if both kids have selected
-            const advikHero = localStorage.getItem('advik_hero');
-            const viaanHero = localStorage.getItem('viaan_hero');
+            const nextKid = KIDS.find(id => !localStorage.getItem(`${id}_hero`));
+            if (nextKid) {
+                currentKidSelecting = nextKid;
+            }
 
-            if (advikHero && viaanHero) {
+            // Check if all kids have selected
+            const allSelected = KIDS.every(id => !!localStorage.getItem(`${id}_hero`));
+
+            if (allSelected) {
                 // Both selected - show submit button and update message
                 document.getElementById('submitBtn').style.display = 'inline-block';
-                document.getElementById('selectionState').innerHTML = '🎉 <strong>Both heroes selected!</strong> Click the button below to START!';
+                document.getElementById('selectionState').innerHTML = '🎉 <strong>All heroes selected!</strong> Click the button below to START!';
             } else {
-                // Not both selected - show which kid to select next
-                currentKidSelecting = kid === 'advik' ? 'viaan' : 'advik';
+                renderHeroOptions();
                 updateSelectionState();
             }
         }
 
         // Submit Hero Selection
         function submitHeroSelection() {
-            const advikHero = localStorage.getItem('advik_hero');
-            const viaanHero = localStorage.getItem('viaan_hero');
+            const allSelected = KIDS.every(id => !!localStorage.getItem(`${id}_hero`));
 
-            if (advikHero && viaanHero) {
+            if (allSelected) {
                 hideHeroSelection();
                 loadDashboard();
             } else {
-                alert('Please select a superhero for both kids first! 🦸');
+                alert('Please select a superhero for all kids first! 🦸');
             }
         }
 
         // Update Selection State
         function updateSelectionState() {
-            const kidName = currentKidSelecting === 'advik' ? 'Advik' : 'Viaan';
-            document.getElementById('selectionState').innerHTML = `Please select a superhero for <strong>${kidName}</strong>`;
+            const kidName = getDisplayName(currentKidSelecting);
+            const selectedCount = KIDS.filter(id => !!localStorage.getItem(`${id}_hero`)).length;
+            const kidLabel = document.getElementById('heroSelectionKidLabel');
+            if (kidLabel) {
+                kidLabel.textContent = `Now selecting for: ${kidName}`;
+            }
+            document.getElementById('selectionState').innerHTML = `Please select a superhero for <strong>${kidName}</strong><br><small>${selectedCount}/${KIDS.length} selected</small>`;
         }
 
         // Change Hero
         function changeHero(kid) {
             currentKidSelecting = kid;
             showHeroSelection();
-            document.getElementById('selectionState').innerHTML = `Change superhero for <strong>${kid === 'advik' ? 'Advik' : 'Viaan'}</strong>`;
+            const kidName = getDisplayName(kid);
+            document.getElementById('selectionState').innerHTML = `Change superhero for <strong>${kidName}</strong>`;
+        }
+
+        function renderHeroOptions() {
+            const container = document.getElementById('heroOptions');
+            if (!container) return;
+
+            container.innerHTML = '';
+
+            Object.entries(SUPERHERO_DATA).forEach(([heroId, hero]) => {
+                const option = document.createElement('div');
+                option.className = 'hero-option';
+                option.innerHTML = `
+                    <div class="hero-emoji">${hero.emoji}</div>
+                    <div class="hero-name">${hero.name}</div>
+                `;
+
+                if (localStorage.getItem(`${currentKidSelecting}_hero`) === heroId) {
+                    option.classList.add('selected');
+                }
+
+                option.addEventListener('click', () => selectHero(heroId, option));
+                container.appendChild(option);
+            });
+        }
+
+        function renderKidCards() {
+            const container = document.getElementById('kidCardsContainer');
+            if (!container) return;
+
+            container.innerHTML = '';
+
+            KIDS.forEach(kid => {
+                const card = document.createElement('div');
+                card.className = `kid-card ${kid}`;
+                card.innerHTML = `
+                    <div class="kid-header">
+                        <div class="hero-badge" id="${kid}-hero-emoji">🦸‍♂️</div>
+                        <div class="kid-name" id="${kid}-name"></div>
+                        <div id="${kid}-hero-name" style="font-size: 0.9em; color: #999; margin-bottom: 10px;">Choose a superhero</div>
+                        <div class="superhero-level" id="${kid}-level">Level: Hero</div>
+                        <button class="change-hero-btn" onclick="changeHero('${kid}')">Change Superhero</button>
+                    </div>
+
+                    <div class="points-display">
+                        <div class="points-label">Today's Points</div>
+                        <div class="points-number" id="${kid}-points">0</div>
+                        <div class="points-label">Yes = +1 | No = -1 per task</div>
+                        <div class="aud-equivalent" id="${kid}-aud">$0.00 AUD</div>
+                    </div>
+
+                    <div class="tasks-section">
+                        <div class="section-title">📋 Daily Tasks</div>
+                        <div id="${kid}-tasks"></div>
+                        <div class="task-net-summary" id="${kid}-task-net">Net task points for today: 0</div>
+                    </div>
+
+                    <div class="extras-section">
+                        <div class="section-title">✨ Extra Perks (Bonus +1 Point)</div>
+                        <div id="${kid}-extras"></div>
+                    </div>
+
+                    <div class="penalties-section">
+                        <div class="section-title">⚠️ Penalties (-1 Point Each)</div>
+                        <div id="${kid}-penalties"></div>
+                    </div>
+
+                    <div class="motivational-message" id="${kid}-motivation">Keep going, you're doing great! 💪</div>
+
+                    <div class="calendar-section">
+                        <div class="calendar-title" id="${kid}-calendar-title">📊 Monthly Completion</div>
+                        <div class="calendar-grid" id="${kid}-calendar"></div>
+                        <div class="monthly-points" id="${kid}-monthly">Monthly Points: 0</div>
+                    </div>
+
+                    <button class="reset-button" onclick="resetDaily('${kid}')">Reset Today's Tasks</button>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function renderKidColorSettings() {
+            const container = document.getElementById('kidColorSettings');
+            if (!container) return;
+
+            container.innerHTML = '';
+
+            KIDS.forEach(kid => {
+                const config = getKidConfig(kid);
+                const color = localStorage.getItem(`${kid}_color`) || (config ? config.color : '#20BF55');
+                const row = document.createElement('div');
+                row.className = 'settings-group';
+                row.innerHTML = `
+                    <label for="color-${kid}">🎨 ${getDisplayName(kid)} Color:</label>
+                    <input type="color" id="color-${kid}" value="${color}">
+                `;
+                container.appendChild(row);
+            });
         }
 
         // Load Dashboard
         function loadDashboard() {
+            renderKidCards();
+            renderKidColorSettings();
+            renderHeroOptions();
+            
+            // Set settings values
+            document.getElementById('taskRate').value = TASK_POINTS_PER_AUD;
+            document.getElementById('extraPerkCents').value = EXTRA_PERK_CENTS;
+            document.getElementById('penaltyCents').value = PENALTY_CENTS;
+            
             KIDS.forEach(kid => {
+                const nameEl = document.getElementById(`${kid}-name`);
+                if (nameEl) {
+                    nameEl.textContent = getDisplayName(kid);
+                }
                 document.getElementById(`${kid}-calendar-title`).textContent = `📊 ${getCurrentMonthName()} Completion`;
                 displayHeroInfo(kid);
                 renderTasks(kid);
@@ -1248,9 +1772,11 @@
                 renderCalendar(kid);
                 updatePoints(kid);
                 updateMotivation(kid);
+                updateKidColorStyle(kid, localStorage.getItem(`${kid}_color`) || getKidConfig(kid).color);
             });
 
             initHistoryView();
+            checkAchievements();
 
             loadData();
         }
@@ -1524,7 +2050,8 @@
             // Warning message
             if (data.includes(index)) {
                 const penaltyName = PENALTIES[index].name;
-                alert(`⚠️ ${penaltyName} deducted 1 point from ${kid === 'advik' ? 'Advik' : 'Viaan'}!`);
+                const penaltyAUD = formatAUDRaw(PENALTY_CENTS / 100, true);
+                alert(`⚠️ ${penaltyName} deducted 1 penalty (= ${penaltyAUD}) from ${getDisplayName(kid)}!`);
             }
         }
 
@@ -1538,13 +2065,13 @@
             const penaltyCount = JSON.parse(localStorage.getItem(penaltiesKey) || '[]').length;
 
             const taskPoints = getTaskPointsFromData(taskData);
-            const extraPoints = extraCount;
-            const penaltyPoints = penaltyCount; // Each penalty = -1 point
-            const totalPoints = taskPoints + extraPoints - penaltyPoints;
+            const penaltyPoints = penaltyCount;
+            const totalPoints = taskPoints + extraCount - penaltyPoints;
+            const totalAUDValue = calcTotalAUD(taskPoints, extraCount, penaltyPoints);
 
             document.getElementById(`${kid}-task-net`).textContent = `Net task points for today: ${taskPoints}`;
             document.getElementById(`${kid}-points`).textContent = totalPoints;
-            document.getElementById(`${kid}-aud`).textContent = formatAUD(totalPoints, true);
+            document.getElementById(`${kid}-aud`).textContent = formatAUDRaw(totalAUDValue, true);
 
             // Update Level
             let level = 'Hero';
@@ -1560,6 +2087,7 @@
             updateTotalPoints();
             renderDayHistory();
             renderMonthlyHistory();
+            checkAchievements();
         }
 
         // Calculate Monthly Points
@@ -1586,20 +2114,41 @@
 
         // Update Total Points
         function updateTotalPoints() {
-            let total = 0;
+            let totalPoints = 0;
+            let totalAUDValue = 0;
+            const today = getCurrentDate();
+
             KIDS.forEach(kid => {
-                const points = parseInt(document.getElementById(`${kid}-points`).textContent);
-                total += points;
+                const taskData = getTaskData(kid);
+                const extraCount = JSON.parse(localStorage.getItem(`${kid}_extras_${today}`) || '[]').length;
+                const penaltyCount = JSON.parse(localStorage.getItem(`${kid}_penalties_${today}`) || '[]').length;
+                const taskPoints = getTaskPointsFromData(taskData);
+                totalPoints += taskPoints + extraCount - penaltyCount;
+                totalAUDValue += calcTotalAUD(taskPoints, extraCount, penaltyCount);
             });
 
-            document.getElementById('totalPoints').textContent = total;
-            document.getElementById('totalAUD').textContent = formatAUD(total, false);
+            document.getElementById('totalPoints').textContent = totalPoints;
+            document.getElementById('totalAUD').textContent = formatAUDRaw(totalAUDValue, false);
+        }
+
+        // Compute AUD from task points, extra perk count, and penalty count using separate rates
+        function calcTotalAUD(taskPoints, extraCount, penaltyCount) {
+            const taskAUD = taskPoints / TASK_POINTS_PER_AUD;
+            const extraAUD = (extraCount * EXTRA_PERK_CENTS) / 100;
+            const penaltyAUD = (penaltyCount * PENALTY_CENTS) / 100;
+            return taskAUD + extraAUD - penaltyAUD;
         }
 
         function formatAUD(points, includeSuffix) {
-            const aud = points / POINTS_PER_AUD;
+            const aud = points / TASK_POINTS_PER_AUD;
             const signPrefix = aud < 0 ? '-$' : '$';
             const formatted = `${signPrefix}${Math.abs(aud).toFixed(2)}`;
+            return includeSuffix ? `${formatted} AUD` : formatted;
+        }
+
+        function formatAUDRaw(audValue, includeSuffix) {
+            const signPrefix = audValue < 0 ? '-$' : '$';
+            const formatted = `${signPrefix}${Math.abs(audValue).toFixed(2)}`;
             return includeSuffix ? `${formatted} AUD` : formatted;
         }
 
@@ -1618,7 +2167,12 @@
         }
 
         function getDisplayName(kid) {
-            return kid === 'advik' ? 'Advik' : 'Viaan';
+            const config = kidConfigs.find(item => item.id === kid);
+            return config ? config.name : kid;
+        }
+
+        function getKidConfig(kid) {
+            return kidConfigs.find(item => item.id === kid);
         }
 
         function getDayPointsForDate(kid, dateStr) {
@@ -1627,12 +2181,14 @@
             const penalties = JSON.parse(localStorage.getItem(`${kid}_penalties_${dateStr}`) || '[]').length;
             const taskPoints = getTaskPointsFromData(taskData);
             const total = taskPoints + extras - penalties;
+            const audTotal = calcTotalAUD(taskPoints, extras, penalties);
 
             return {
                 taskPoints,
                 extras,
                 penalties,
                 total,
+                audTotal,
             };
         }
 
@@ -1661,6 +2217,18 @@
             }
 
             const storageDate = getStorageDateFromISODate(dateInput.value);
+            const historyGrid = document.getElementById('historyDayGrid');
+            if (!historyGrid) {
+                return;
+            }
+
+            historyGrid.innerHTML = '';
+            KIDS.forEach(kid => {
+                const card = document.createElement('div');
+                card.className = 'history-day-card';
+                card.id = `${kid}-day-summary`;
+                historyGrid.appendChild(card);
+            });
 
             KIDS.forEach(kid => {
                 const info = getDayPointsForDate(kid, storageDate);
@@ -1671,10 +2239,10 @@
 
                 card.innerHTML = `
                     <strong>${getDisplayName(kid)} - ${dateInput.value}</strong>
-                    Task Net: ${info.taskPoints} points<br>
-                    Extras: +${info.extras} points<br>
-                    Penalties: -${info.penalties} points<br>
-                    Total: ${info.total} points (${formatAUD(info.total, true)})
+                    Task Net: ${info.taskPoints} pts (${formatAUD(info.taskPoints, true)})<br>
+                    Extras: +${info.extras} perk(s) (+${formatAUDRaw((info.extras * EXTRA_PERK_CENTS) / 100, true)})<br>
+                    Penalties: -${info.penalties} (-${formatAUDRaw((info.penalties * PENALTY_CENTS) / 100, true)})<br>
+                    Total: ${info.total} pts = ${formatAUDRaw(info.audTotal, true)}
                 `;
             });
         }
@@ -1696,26 +2264,32 @@
             let combinedPoints = 0;
             tableBody.innerHTML = '';
 
+            let combinedAUD = 0;
+
             KIDS.forEach(kid => {
                 let monthPoints = 0;
+                let monthAUD = 0;
 
                 for (let day = 1; day <= daysInMonth; day++) {
                     const dateStr = `${day}-${month}-${year}`;
-                    monthPoints += getDayPointsForDate(kid, dateStr).total;
+                    const info = getDayPointsForDate(kid, dateStr);
+                    monthPoints += info.total;
+                    monthAUD += info.audTotal;
                 }
 
                 combinedPoints += monthPoints;
+                combinedAUD += monthAUD;
 
                 const row = document.createElement('tr');
                 row.innerHTML = `
                     <td>${getDisplayName(kid)}</td>
                     <td>${monthPoints}</td>
-                    <td>${formatAUD(monthPoints, true)}</td>
+                    <td>${formatAUDRaw(monthAUD, true)}</td>
                 `;
                 tableBody.appendChild(row);
             });
 
-            totalEl.textContent = `Combined Monthly Total: ${combinedPoints} points (${formatAUD(combinedPoints, true)})`;
+            totalEl.textContent = `Combined Monthly Total: ${combinedPoints} points (${formatAUDRaw(combinedAUD, true)})`;
         }
 
         // Update Motivation
@@ -1745,7 +2319,8 @@
 
         // Reset Daily
         function resetDaily(kid) {
-            if (confirm(`Reset ${kid === 'advik' ? 'Advik' : 'Viaan'}'s tasks for today?`)) {
+            const kidName = getDisplayName(kid);
+            if (confirm(`Reset ${kidName}'s tasks for today?`)) {
                 localStorage.removeItem(`${kid}_tasks_${getCurrentDate()}`);
                 localStorage.removeItem(`${kid}_extras_${getCurrentDate()}`);
                 localStorage.removeItem(`${kid}_penalties_${getCurrentDate()}`);
@@ -1768,8 +2343,11 @@
                     const key = localStorage.key(i);
                     if (!key) continue;
 
-                    const isKidData = key.startsWith('advik_tasks_') || key.startsWith('advik_extras_') || key.startsWith('advik_penalties_') ||
-                                      key.startsWith('viaan_tasks_') || key.startsWith('viaan_extras_') || key.startsWith('viaan_penalties_');
+                    const isKidData = KIDS.some(kid =>
+                        key.startsWith(`${kid}_tasks_`) ||
+                        key.startsWith(`${kid}_extras_`) ||
+                        key.startsWith(`${kid}_penalties_`)
+                    );
 
                     if (isKidData && key.endsWith(monthSuffix)) {
                         keysToRemove.push(key);
@@ -1785,7 +2363,9 @@
 
         // Show Celebration
         function showCelebration(kid) {
-            alert(`🎉 Amazing! You completed a bonus perk! 🌟 +1 Point (= $0.10 AUD)`);
+            const kidName = getDisplayName(kid);
+            const perkAUD = formatAUDRaw(EXTRA_PERK_CENTS / 100, true);
+            alert(`🎉 Amazing ${kidName}! You completed a bonus perk! 🌟 +1 Perk (= ${perkAUD})`);
         }
 
         // Load Data
@@ -1798,3 +2378,6 @@
     </script>
 </body>
 </html>
+
+
+
